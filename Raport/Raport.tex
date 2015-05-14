@@ -74,6 +74,16 @@
 
 \section*{Introduction}
 
+\vspace{1cm}
+
+Dans cet article, nous cherchons à expliquer au lecteur le principe et l'intérêt de deux métaheuristiques : le recuit simulé et son amélioration quantique. Les métaheuristiques permettent d'établir un compromis entre la résolution d'un problème difficile (un problème difficile est un problème dont la solution exacte ne peut pas être obtenue en temps polynomial) et le temps de calcul nécessaire pour le résoudre. Si ces algorithmes n'apportent pas une solution exacte au problème, ils l'apportent néanmoins rapidement et souvent avec d'excellents résultats. Nous nous sommes plus particulièrement attachés à l'étude du problème du voyageur de commerce (Traveling Salesman Problem ou TSP) mais nous souhaiterions souligner le fait que ce type d'algorithmes peut être adapté à une immense variété de problèmes difficiles.
+ 
+			L'idée générale consiste à explorer efficacement l'espace des possibles afin d'obtenir une bonne solution. Ces algorithmes s'inspirent en particulier du chauffage suivi du refroidissement des métaux, aussi appelé recuit. Dans ce contexte, l'objectif des physiciens est de trouver l'état pour lequel l'énergie potentielle du métal est minimale en évitant les minima locaux présentés par la courbe énergétique. Le recuit simulé et le recuit quantique sont donc des algorithmes à utiliser lorsque la surface de coût n'est pas de nature convexe.
+	
+\vspace{1cm}
+
+Nous définirons dans un premier temps le problème TSP. Nous verrons alors le principe du recuit simulé, les notions de physique sous-jacentes et son implémentation pratique. Nous traiterons dans un second temps des nombreux apports du recuit quantique, jusqu'alors peu étudié. Enfin, nous illustrerons ces méthodes avec les résultats obtenus sur le problème TSP.
+		
 \clearpage
 
 
@@ -81,14 +91,23 @@
 
 \subsection{Présentation du problème}
 
-Le problème Traveling Salesman Problem (TSP), aussi connu sous le nom de Problème du voyageur de commerce, est un problème qui consiste, étant donné un ensemble de villes séparées par des distances données, à trouver le plus court chemin qui relie toutes les villes.\cite{Wikipedia}
+Le problème du voyageur de commerce est défini par un ensemble de N points (des villes) séparées entre elles par un poids ou une distance $ d_{i,j} $.
+L'objectif est de permettre au voyageur de commerce de trouver la route la plus courte lui permettant de visiter toutes les villes une fois tout en revenant à son point de départ. TSP trouve de nombreuses applications dans le domaine de la logistique mais aussi dans des domaines plus exotiques tels que la conception de bras robotisés, la fabrication de puces électroniques et même le séquençage de l'ADN.
+	En 1972, Richard M. Karp a montré que le problème TSP était NP-complet. Il est facile de montrer que pour un problème avec N villes, il existe $ \frac{(N-1)!}{2} $ routes possibles, soit environ le nombre estimé de particules fondamentales dans l'univers. Supprimer la contrainte d'une unique visite ne réduit pas la complexité du problème. 
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[scale=0.4]{pr1002.png} 
+\caption{Un exemple de route solution pour le benchmark pr1002}
+\end{center}
+\end{figure}
 
+Remarquons que $ d_{i,j} $ est une notion abstraite. Le graphe ne doit pas nécessairement respecter l'inégalité triangulaire ni même comporter des arêtes affectées de poids symétriques. Ces variantes ne manquent souvent pas d'accroître la nature non convexe du problème en créant de nouveaux minima locaux.
 
 \subsection{Cartographie des minima locaux}
 
 L’idée est de tenter d’établir une carte des minima locaux pour affiner le paramétrage. Cela fournirait également un outil supplémentaire pour comparer deux recuits différents entre eux, en comparant leur localisation dans le voisinage proche du minimum global du graphe.
-      Le problème est a priori complexe car il n’est pas possible de représenter en deux dimensions une carte où l’on pourrait voir une courbe continue dessinant la surface des énergies en fonction des routages. En effet, deux routages peuvent avoir un rapprochement très grand et pour autant ne pas avoir des énergies voisines, puisque l’énergie est liée au poids des arêtes et non à l’existence ou non de ces arêtes.
+Le problème est a priori complexe car il n’est pas possible de représenter en deux dimensions une carte où l’on pourrait voir une courbe continue dessinant la surface des énergies en fonction des routages. En effet, deux routages peuvent avoir un rapprochement très grand et pour autant ne pas avoir des énergies voisines, puisque l’énergie est liée au poids des arêtes et non à l’existence ou non de ces arêtes.
 Ainsi, il convient d’essayer d’estimer la densité des minima locaux, en regard à une norme donnée. 
 Une nouvelle difficulté apparaît : positionner les répliques les unes par rapport aux autres en peu de temps de calcul car cette cartographie est a priori en temps exponentiel. 
 
@@ -106,8 +125,40 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
       L’idée est donc d’estimer une distance radiale d’un minimum local au minimum global, sans tenir compte a priori de la distance des minima locaux entre eux. Ainsi, chaque minimum global trouvé peut être placé une carte, on place aléatoirement sur un cercle centré sur le minimum global, de rayon son rapprochement au minimum global.
       L’idée de placer chaque minimum local aléatoirement sur un cercle permet une visualisation en trois dimensions de la densité de minima, et souligne la possibilité d’intégrer une information supplémentaire dans le modèle en jouant sur l’angle aléatoire - par exemple, pour deux minima différents qui ont une distance identique au minimum global, prendre en compte la distance entre eux et en rendre compte dans leur éloignement sur leur cercle.
 
+\clearpage
+
 \section{Recuit Simulé}
+
 \subsection{Principes physiques}
+
+	C'est au début des années 80 que Kirkpatrick a généralisé la notion de recuit simulé. En métallurgie, le recuit consiste à chauffer un métal jusqu'à sa température de fusion puis à le refroidir très lentement jusqu'à ce que les atomes se réarrangent pour regagner l'état solide. L'état fondamental du solide sera atteint seulement si la température initiale est assez élevée et si le refroidissement est suffisamment lent. Si ces conditions ne sont pas respectées, le métal se retrouve dans un minimum local d'énergie potentielle, c'est à dire un état méta-stable.
+	
+	Il convient donc de jouer avec la variation de température pour permettre au système de sortir des minima locaux. En 1953, Metropolis avait déjà développé un algorithme recréant l'évolution d'un métal au cours du recuit. En partant d'un état dont l'énergie est égale à $E_i$, on applique une légère variation de température. À l'équilibre thermique, le système peut se retrouver dans un état j dont l'énergie est $E_j$.
+	
+	La probabilité qu'un solide soit dans un état i avec une énergie $E_i$ à la température T est donnée par : $\mathbb{P}$(\emph{X}=i) = $e^{\frac{-E_i}{k_BT}}$/$\sum_{\substack{j}}$$e^{\frac{-E_j}{k_BT}}$. Plus l'énergie de l'état i est faible par rapport à celle des états j, plus le système a des chances de se retrouver dans cet état. C'est pourquoi Metropolis choisit de fixer la probabilité d'acceptation d'un passage A de l'état i à j à la température T par $\mathbb{P}$(A) = $e^\frac{(E_i-E_j)}{k_BT}$.
+	
+	\vspace{1cm}
+	
+	En faisant l'analogie entre une solution du problème et un état du système et entre l'énergie d'un état et le coût de la solution, on peut alors construire l'algorithme du recuit simulé :
+	
+	1) Choisir une solution initiale et fixer k = 0
+	
+	2) Réaliser une mutation élémentaire sur cette solution initiale
+	
+	3) Évaluer la variation d'énergie $\Delta{E}=E_j-E_i$
+	
+	4) Si $\Delta{E}\prec{0}$ alors accepter cette mutation 
+	
+	5) Sinon ne l'accepter qu'avec une probabilité égale à $\mathbb{P}$(A)
+	
+	6) Augmenter k de 1, choisir $T_{k+1}$ plus petit que $T_{k}$ et retourner en 2)
+
+\vspace{1cm}
+
+Ainsi, aux hautes températures, le système change d'état quasiment aléatoirement. Il explore la surface d'énergie de manière globale. Lorsque la température décroit, le système a de moins en moins de chance d'accepter de passer dans un état qui augmente son énergie. La recherche d'une solution devient alors locale car l'état courant ne peut plus franchir une barrière d'énergie importante. Plus le refroidissement est lent, plus le système a de chances d'atteindre un état dont l'énergie est proche de l'énergie fondamentale. Le lecteur attentif aura compris que les éléments importants du recuit simulé sont : la température initiale, le taux de décroissance de la température à chaque itération et enfin la nature de la mutation élémentaire. $K_B$ est arbitrairement fixé égal à 1.
+
+	Dans la partie suivante, nous montrons comment nous sommes parvenus à fixer les paramètres importants du recuit.
+
 \subsection{Implémentation}
 
 \section{Recuit Quantique}
