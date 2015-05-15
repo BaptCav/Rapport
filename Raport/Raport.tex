@@ -31,14 +31,14 @@
 \usepackage{amsfonts}%
 \usepackage{amssymb}%
 \usepackage{graphicx}
-
+\usepackage{algorithm}
+\usepackage{algorithmic}
 \usepackage[utf8]{inputenc} % un package pour la langue francaise
 \usepackage[T1]{fontenc}      
 \usepackage[francais]{babel}
 %----------------------------------------------------------
 \newtheorem{theorem}{Theorem}
 \newtheorem{acknowledgement}[theorem]{Acknowledgement}
-\newtheorem{algorithm}[theorem]{Algorithm}
 \newtheorem{axiom}[theorem]{Axiom}
 \newtheorem{case}[theorem]{Case}
 \newtheorem{claim}[theorem]{Claim}
@@ -141,52 +141,61 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
 	
 	En faisant l'analogie entre une solution du problème et un état du système et entre l'énergie d'un état et le coût de la solution, on peut alors construire l'algorithme du recuit simulé :
 	
-	1) Choisir une solution initiale et fixer k = 0
+	\begin{algorithm} 
+	\caption{Recuit Simulé}
+	\begin{algorithmic}
 	
-	2) Réaliser une mutation élémentaire sur cette solution initiale
-	
-	3) Évaluer la variation d'énergie $\Delta{E}=E_j-E_i$
-	
-	4) Si $\Delta{E}\prec{0}$ alors accepter cette mutation 
-	
-	5) Sinon ne l'accepter qu'avec une probabilité égale à $\mathbb{P}$(A)
-	
-	6) Augmenter k de 1, choisir $T_{k+1}$ plus petit que $T_{k}$ et retourner en 2)
-
+	\STATE $sol \leftarrow RealisationAleatoire$
+	\FOR{$it=0; it < N; it++$}	
+		\STATE $sol \leftarrow mutation( sol ) $
+		\STATE $\Delta{E} \leftarrow E_j-E_i$
+		\IF{$\Delta{E}\prec{0}$} 
+			\STATE Accepter cette mutation	
+		\ELSE 
+			\STATE Ne l'accepter qu'avec une probabilité égale à $\mathbb{P}$(A)
+		\ENDIF
+		\STATE Choisir $T_{k+1}$ plus petit que $T_{k}$
+	\ENDFOR
+	\RETURN $sol$
+	\end{algorithmic}
+	\end{algorithm}
 \vspace{1cm}
 
 Ainsi, aux hautes températures, le système change d'état quasiment aléatoirement. Il explore la surface d'énergie de manière globale. Lorsque la température décroit, le système a de moins en moins de chance d'accepter de passer dans un état qui augmente son énergie. La recherche d'une solution devient alors locale car l'état courant ne peut plus franchir une barrière d'énergie importante. Plus le refroidissement est lent, plus le système a de chances d'atteindre un état dont l'énergie est proche de l'énergie fondamentale. Le lecteur attentif aura compris que les éléments importants du recuit simulé sont : la température initiale, le taux de décroissance de la température à chaque itération et enfin la nature de la mutation élémentaire. $K_B$ est arbitrairement fixé égal à 1.
 
-	Dans la partie suivante, nous montrons comment nous sommes parvenus à fixer les paramètres importants du recuit.
+Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer les paramètres importants du recuit.
 
 \subsection{Implémentation}
 
 			
+\clearpage
 \section{Recuit Quantique}
 \subsection{Fonctionement}
-\subsection{Classe Routage}
 
+
+\clearpage
 \section{Résultats}
 
 \vspace{1cm}
 
 		Il s'agira, dans cette partie, de comparer les performances des deux algorithmes présentés précédemment. Dire lequel des deux algorithmes est le meilleur n'est pas tâche aisée : pour certains paramètres, sur un certain graphe, le recuit simulé donne de meilleurs résultats que le recuit quantique sur un même nombre d'évaluations global. Par exemple, lorsque le nombre de répliques est extravagant sur le recuit quantique, on descend très lentement en énergie, contrairement au recuit simulé qui se rapproche rapidement du minimum global. Inversement, le recuit quantique peut être préférable dans d'autres dispositions. Il faudra donc faire attention à comparer "le meilleur recuit simulé"' au "`meilleur recuit quantique"' pour un même nombre d'évaluations.
 		
-		\vspace{1cm}
-		
+\vspace{1cm}
+
 		On traitera d'abord le comportement global des deux recuits. Un premier constat est celui concernant la valeur de l'énergie potentielle tout au long du recuit. A travers la figure suivante, on remarque que les deux algorithmes adoptent des attitudes globalement différentes.
 		
-	\begin{figure}
+	\begin{figure}[h]
 	\begin{center}
-	\includegraphics[scale=0.3]{comparaison_pr76.jpg}
+	\includegraphics[scale=0.25]{comparaison_pr76.jpg}
 	\caption{Evolution des énergies sur pr76 et rapprochement des répliques pour QA}
+	\label{QASA}
 	\end{center}
 	\end{figure}
 		
 		Comme on peut le voir, la décroissance du recuit quantique en énergie est plus lente. D'ailleurs, plus le nombre de répliques est important, plus cette décroissance sera lente. En fin de recuit, le recuit simulé stagne car ça prend du temps de trouver un état de meilleure énergie. Le recuit quantique le rattrape en rapprochant les répliques les unes aux autres : cela permet d'explorer davantage d'états potentiellement intéressants. 
 		Ce rapprochement se mesure en déterminant le nombre d'arêtes communes entre les différentes routes. Si toutes les routes sont identiques, le rapprochement vaut 100. On a tracé les rapprochements pour un recuit de 20 répliques sans énergie cinétique (recuits simulés en parallèle) et avec énergie cinétique (recuit quantique) : 
 		
-	\begin{figure}
+	\begin{figure}[!h]
 	\begin{center}
 	\includegraphics[scale=0.3]{rapprochement.jpg}
 	\caption{Rapprochement des répliques pour QA et SA parallèle sur pr76}
@@ -196,32 +205,40 @@ Ainsi, aux hautes températures, le système change d'état quasiment aléatoire
 		Le rapprochement sur les recuits simulés en parallèle est uniquement dû à la convergence des répliques vers le minimum global. L'écart entre les deux courbes illustre le rôle du terme cinétique dans l'hamiltonien. C'est en quelque sorte le pari lancé par le recuit quantique : rapprocher les répliques entre elles pour explorer l'espace convexe constitué par ces routes.
 		
 		\vspace{1cm}
+		La comparaison des deux recuits se fera pour des probabilités d'acceptations identiques afin de ne pas influencer le résultat final de l'expérience. Pour cela, on prend $T_{SA} = T_{QA} \times P $ où P est le nombre de répliques. La température est réglée par notre paramétreur, de même que $\Gamma$. Le nombre de répliques idéal est utilisé. La courbe obtenue sur l'évolution des énergies est celle de la figure~\ref{QASA}. Il faut zoomer sur les dernières évaluations du recuit.
 		
-		La comparaison des deux recuits se fera pour des probabilités d'acceptations identiques afin de ne pas influer sur le résultat final de l'expérience. Pour cela, on prend $T_{SA} = T_{QA} \times P $ où P est le nombre de répliques. La température est réglée par notre paramétreur, de même que $\Gamma$. Le nombre de répliques idéal est utilisé. La courbe obtenue sur l'évolution des énergies est celle de la figure 3. Il faut zoomer sur les dernières évaluations du recuit.
-		
-	\begin{figure}
+	\begin{figure}[ht]
+	
 	\begin{center}
-	\includegraphics[scale=0.2]{zoom_pr76.jpg}
-	\caption{Zoom sur les dernières évaluations des expériences SA et QA}
+	\includegraphics[scale=0.25]{zoom_pr76.jpg}
+	\caption{Meilleures Energies des dernières itérations des expériences SA et QA}
+	\label{fin}
+
 	\end{center}
+		
 	\end{figure}
 	
-		Le recuit quantique obtient une énergie finale inférieure à celle du recuit simulé. De plus, on voit bien sur la figure que les intervalles de confiance à 95\% ne se chevauchent pas, ce qui donne un avantage considérable au recuit quantique.
+		Le recuit quantique obtient une énergie finale inférieure à celle du recuit simulé. De plus, on voit sur la figure~\ref{fin} que les intervalles de confiance à 95\% ne se chevauchent pas, ce qui donne un avantage considérable au recuit quantique.
 		
-		Une autre comparaison a été effectuée avec un autre benchmark à 58 noeuds :
+		Une autre comparaison a été effectuée avec un autre benchmark à 58 noeuds (figure~\ref{comparaison}).
 	
-	\begin{figure}
+	\begin{figure}[!ht]
+		
 	\begin{center}
-	\includegraphics[scale=0.2]{brazil58_zoom.jpg}
+	\includegraphics[scale=0.25]{brazil58_zoom.jpg}
 	\caption{Evolution de l'énergie sur SA, SA parallèle et QA en fin de recuit}
+	\label{comparaison}
 	\end{center}
 	\end{figure}
 	
 		Il est interessant de voir que tout l'intérêt du recuit quantique repose dans l'ajout du terme cinétique : en effet, SA parallèle obtient une moyenne inférieure à SA alors que le recuit quantique est avantageux comparé à ces deux algorithmes.
 		
-		
+
+\clearpage	
 \section*{Conclusion}
 
+\clearpage	
 \listoffigures
+\listofalgorithms
 \bibliography{thebibliography}
 \end{document}

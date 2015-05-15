@@ -1,7 +1,7 @@
 \select@language {french}
 \contentsline {figure}{\numberline {1}{\ignorespaces Un exemple de route solution pour le benchmark pr1002}}{4}
 \contentsline {figure}{\numberline {2}{\ignorespaces Cartographie des minima locaux sur le benchmark brazil58}}{5}
-\contentsline {figure}{\numberline {3}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{8}
-\contentsline {figure}{\numberline {4}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{8}
-\contentsline {figure}{\numberline {5}{\ignorespaces Zoom sur les derni\IeC {\`e}res \IeC {\'e}valuations des exp\IeC {\'e}riences SA et QA}}{9}
-\contentsline {figure}{\numberline {6}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{9}
+\contentsline {figure}{\numberline {3}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{9}
+\contentsline {figure}{\numberline {4}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{10}
+\contentsline {figure}{\numberline {5}{\ignorespaces Meilleures Energies des derni\IeC {\`e}res it\IeC {\'e}rations des exp\IeC {\'e}riences SA et QA}}{11}
+\contentsline {figure}{\numberline {6}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{11}

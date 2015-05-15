@@ -10,15 +10,15 @@ MinPos.y=-1
 MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
-NormalPos.top=32
-NormalPos.right=1562
-NormalPos.bottom=649
+NormalPos.top=26
+NormalPos.right=1133
+NormalPos.bottom=385
 Class=LaTeXView
 Document=Raport.tex
 
 [Frame0_View0,0]
-TopLine=155
-Cursor=8460
+TopLine=232
+Cursor=13108
 
 [SessionInfo]
 FrameCount=1
