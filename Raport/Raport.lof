@@ -1,7 +1,15 @@
 \select@language {french}
 \contentsline {figure}{\numberline {1}{\ignorespaces Un exemple de route solution pour le benchmark pr1002}}{4}
 \contentsline {figure}{\numberline {2}{\ignorespaces Cartographie des minima locaux sur le benchmark brazil58}}{5}
-\contentsline {figure}{\numberline {3}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{9}
-\contentsline {figure}{\numberline {4}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{10}
-\contentsline {figure}{\numberline {5}{\ignorespaces Meilleures Energies des derni\IeC {\`e}res it\IeC {\'e}rations des exp\IeC {\'e}riences SA et QA}}{11}
-\contentsline {figure}{\numberline {6}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{11}
+\contentsline {figure}{\numberline {3}{\ignorespaces Fonctionnement de la mutation 2-opt}}{8}
+\contentsline {figure}{\numberline {4}{\ignorespaces Comparaison entre 2-opt(en bleu) et 3-opt(en rouge)}}{8}
+\contentsline {figure}{\numberline {5}{\ignorespaces Solution en \IeC {\'e}nergie du recuit simul\IeC {\'e} pour une temp\IeC {\'e}rature arbitraire}}{9}
+\contentsline {figure}{\numberline {6}{\ignorespaces Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur gr24}}{9}
+\contentsline {figure}{\numberline {7}{\ignorespaces Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur bier127}}{10}
+\contentsline {figure}{\numberline {8}{\ignorespaces Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur a280}}{10}
+\contentsline {figure}{\numberline {9}{\ignorespaces Performance du recuit avec le param\IeC {\'e}treur en d\IeC {\'e}croissance lin\IeC {\'e}aire}}{11}
+\contentsline {figure}{\numberline {10}{\ignorespaces Performance du recuit avec le param\IeC {\'e}treur en d\IeC {\'e}croissance exponentielle}}{11}
+\contentsline {figure}{\numberline {11}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{14}
+\contentsline {figure}{\numberline {12}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{15}
+\contentsline {figure}{\numberline {13}{\ignorespaces Meilleures Energies des derni\IeC {\`e}res it\IeC {\'e}rations des exp\IeC {\'e}riences SA et QA}}{16}
+\contentsline {figure}{\numberline {14}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{16}

@@ -167,7 +167,141 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 
 \subsection{Implémentation}
 
+\vspace{1cm}
+
+	Pour utiliser cet algorithme sur le problème du voyageur de commerce, il faut commencer par définir les différents éléments indispensables au recuit : l'état, l'énergie et la mutation.
+	Un état est défini comme une solution possible au problème donné. Par exemple, pour le problème SAT, l'état est l'assignation, à chaque variable, d'un booléen. Pour le problème TSP, l'état est une route c'est-à-dire une suite d'arêtes où chaque noeud n'est traversé qu'une seule et unique fois. D'un point de vue informatique, une route sera représentée par une liste de noeuds. Le graphe est représenté par une matrice carrée des distances $ d_{i,j} $. La taille de cette matrice définit le nombre de noeuds dans la route. A chaque état est associée une énergie. Cette énergie correspondra ici à la longueur totale de la route : c'est la somme des longueurs de chacune des arêtes $ (i,j) $ de la route, chaque longueur étant donné par la matrice du graphe.
+	
+	
+	\begin{table}[hp]
+		\centering
+			\begin{tabular}{|*{5}{c|}}
+					\hline
+					0  & 2  & 3 & 4 & 5 \\
+					\hline
+					2  & 0 & 6 & 8 & 1 \\
+					\hline
+					3  & 6 & 0 & 3 & 5 \\
+					\hline
+					4  & 8 & 3 & 0 & 2 \\
+					\hline
+					5  & 1 & 5 & 2 & 0 \\
+					\hline
+			\end{tabular}
+		\label{tableau_distances}
+		\caption{Exemple de graphe à 5 noeuds}
+	\end{table}
+
+Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie correspondant à la route définie par les noeuds $ 0\rightarrow 2\rightarrow 4\rightarrow 1\rightarrow 3 $ vaut 3+5+1+8+4 donc 21. On se réfère ici à une indexation Java, commençant à 0. De plus, comme c'est le cas pour ce graphe, tous les problèmes traités dans ce document seront symétriques.
+	Pour ce qui est de la mutation, nous utiliserons 2-opt car c'est la mutation sur TSP qui modifie le moins d'arêtes, à savoir 2, entre l'état courant et l'état muté. Nous démontrons en figure~\ref{mutations} que c'est la mutation la plus efficace face à des mutations qui modifient davantage d'arêtes.
+		La mutation 2-opt consiste à choisir deux noeuds i et j différents de la route, à les échanger et à échanger les noeuds 'intermédiaires', autrement dit d'échanger le noeud suivant i et le noeud précédent j, etc... L'implémentation de cette mutation est expliquée sur la figure ~\ref{2opt}.
+	
+	\begin{figure}[!h]
+		
+	\begin{center}
+	\includegraphics[scale=0.25]{2opt.png}
+	\caption{Fonctionnement de la mutation 2-opt}
+	\label{2opt}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[!h]
+		
+	\begin{center}
+	\includegraphics[scale=0.25]{pr1002_mutation.jpg}
+	\caption{Comparaison entre 2-opt(en bleu) et 3-opt(en rouge)}
+	\label{mutations}
+	\end{center}
+	\end{figure}
 			
+			L'étude de l'influence des paramètres est primordiale si l'on souhaite exécuter un recuit efficace. Pour un recuit simulé, étant donné que K est fixé, le seul paramètre à prendre en compte est la température. Mais ce paramètre n'est pas fixe, il décroît et il y a donc trois données à définir : la température de début $ T_{deb} $, la température de fin $T_{fin} $ et le mode de décroissance. On s'est très vite aperçu, et cela est parfaitement cohérent, que fixer une fonction température $ T_{n} $ ne donnait pas des résultats satisfaisants sur tous les benchmarks. Cette expérience est décrite dans le tableau ~\ref{perf_random_sa} où on pose $ T_{deb} = 1000 $ , décroissance exponentielle avec un facteur de décroissance de 0.99. La température de fin est très proche de 0. On a $ T_{n} = 1000 \times 0.99^{n} $ avec n = $0..100 \times 58 \times 58 $
+			
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.4]{perf_random_sa.png}
+	\caption{Solution en énergie du recuit simulé pour une température arbitraire}
+	\label{perf_random_sa}
+	\end{center}
+	\end{figure}
+	
+		En réalité, il n'existe pas de fonction température universelle, compatible avec tous les graphes. Pour utiliser correctement le recuit simulé, il faut adapter la température à chaque graphe.
+		
+		\vspace{1cm}
+		
+		On va, pour cela, essayer de trouver un algorithme qui détermine correctement la température du recuit en fonction du graphe traité : un paramétreur universel.
+		Rappelons rapidement quel est le rôle de la température. Elle ajuste la valeur de la probabilité d'acceptation lorsque la mutation nous dirige vers un état plus haut en énergie : $ p = e^{-\frac{\Delta E}{KT}} $. Il faut paramétrer de telle sorte que les probabilités d'acceptation soient quasi-idéales pour une bonne utilisation du recuit. Sur une évaluation, $ p $  dépend donc de $ \Delta E $ et de $ T $. 
+		Pour concevoir notre paramétreur, on va émettre deux hypothèses importantes. Tout d'abord, on émet l'hypothèse que l'efficacité du recuit simulé dans son ensemble dépend de $ T_{n} $ et de la distribution globale de toutes les différences d'énergie $ \Delta E $ engendrées par des 2-opt sur le graphe. On construira donc un échantillon trié de 1000 $ \Delta E $. Dans un second temps, on suppose qu'il existe un intervalle $ \Delta E_{i} \leq T_{n} \leq \Delta E_{j} $ où le recuit est efficace pour tout graphe. Autrement dit, on veut trouver i et j universels. 
+		L'objectif est donc de déterminer ces deux indices désormais. Sur plusieurs benchmarks, on lance des recuits pour une décroissance linéaire, $ T_{fin} = 0 $ avec différentes températures de départ $ T_{deb} = 2.\Delta E_{k} $. On notera les différentes valeurs de k qui donnent les meilleurs recuits pour se faire une idée de l'intervalle [i,j].
+		
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.25]{gr24_zonecritique.jpg}
+	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur gr24}
+	\label{gr24_zone}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.25]{bier127_zonecritique.jpg}
+	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur bier127}
+	\label{bier127_zone}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.25]{a280_zonecritique.jpg}
+	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur a280}
+	\label{a280_zone}
+	\end{center}
+	\end{figure}
+		
+		Les trois figures précédentes présentent les résultats de cette expérience sur plusieurs exemples. On constate que sur chacune d'entre elles, la zone $ 2. \Delta E_{50} \leq T_{deb} \leq 2. \Delta E_{100} $ fournit les meilleurs résultats. Il faut donc concentrer la température autour du cinquième centile et du premier décile de la distribution des $ \Delta E $.
+		Pour une décroissance linéaire, on posera $ T_{deb} = \Delta E_{100} $ et $ T_{fin} = \Delta E_{50} $. 
+		Pour une décroissance exponentielle, on posera $ T_{deb} = 10.\Delta E_{100} $ et $ T_{fin} = \Delta E_{50} $.
+		
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.4]{perf_lin.png}
+	\caption{Performance du recuit avec le paramétreur en décroissance linéaire}
+	\label{perf_lin}
+	\end{center}
+	\end{figure}
+	
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.4]{perf_exp.png}
+	\caption{Performance du recuit avec le paramétreur en décroissance exponentielle}
+	\label{perf_exp}
+	\end{center}
+	\end{figure}
+	
+	Les figures ~\ref{perf_lin} et ~\ref{perf_exp} nous fournissent les performances de notre paramétreur sur un lot d'une quinzaine de benchmarks. Si l'on compare avec la figure ~\ref{perf_random_sa}, le pourcentage moyen est clairement amélioré. Seul le graphe brg180 résiste à notre paramétreur : en regardant la matrice des distances de ce benchmark, on s'aperçoit qu'elle est assez particulière : les énergies des arêtes sont très similaires, certaines sont infinies,... Cela crée des discontinuités importantes dans la distribution des $ \Delta E $ et le paramétreur prend souvent une valeur trop élevée pour T sur tout le recuit. A noter que non seulement brg180 se résoud très bien avec T = 0 mais aussi que de telles discontinuités ne peuvent apparaître avec un graphe euclidien.
+	
+	\begin{algorithm}[!h] 
+	\caption{Paramétreur linéaire}
+	\begin{algorithmic}
+	
+	\STATE $ l \leftarrow{listeVide} $
+	\FOR{$ k = 0; k < 1000; k++ $}
+		\STATE $ r \leftarrow{new RouteAleatoire} $
+		\STATE $r \leftarrow mutation( r ) $
+		\STATE $\Delta{E} \leftarrow E_j-E_i$
+		\IF{$\Delta{E} > 0$}
+			\STATE{$l.ajoute(\Delta{E})$}
+		\ENDIF
+	\ENDFOR
+	\STATE{$l.trie()$}
+	\STATE{$ T_{deb} = l.get(100) $}
+	\STATE{$ T_{fin} = l.get(50) $}
+	\STATE{$ coefficientDeRefroidissement = \frac{T_{fin}-T_{deb}}{N} $}
+	\end{algorithmic}
+	\end{algorithm}
+	
+	L'application du recuit simulé sur TSP pose le problème des paramètres. La recherche de la bonne température pour un seul graphe nécessite déjà de nombreux tests. Nous avons proposé à l'utilisateur une méthode permettant de calibrer automatiquement la température. Cette méthode ne correspond bien évidemment pas au paramétrage idéal. Cependant, si le temps nous est compté, elle évite des tests encombrants pour trouver T et donne une bonne approximation du minimum global. Le temps d'exécution du paramétreur est négligeable comparé à celui du recuit simulé qui ne dépasse jamais quelques secondes pour des graphes de moins de 1000 noeuds traités en plusieurs millions d'évaluations.
+	
+	
 \clearpage
 \section{Recuit Quantique}
 \subsection{Fonctionement}
