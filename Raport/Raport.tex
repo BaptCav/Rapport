@@ -93,7 +93,7 @@ Nous définirons dans un premier temps le problème TSP. Nous verrons alors le p
 
 Le problème du voyageur de commerce est défini par un ensemble de N points (des villes) séparées entre elles par un poids ou une distance $ d_{i,j} $.
 L'objectif est de permettre au voyageur de commerce de trouver la route la plus courte lui permettant de visiter toutes les villes une fois tout en revenant à son point de départ. TSP trouve de nombreuses applications dans le domaine de la logistique mais aussi dans des domaines plus exotiques tels que la conception de bras robotisés, la fabrication de puces électroniques et même le séquençage de l'ADN.
-	En 1972, Richard M. Karp a montré que le problème TSP était NP-complet. Il est facile de montrer que pour un problème avec N villes, il existe $ \frac{(N-1)!}{2} $ routes possibles, soit environ le nombre estimé de particules fondamentales dans l'univers. Supprimer la contrainte d'une unique visite ne réduit pas la complexité du problème. 
+	En 1972, Richard M. Karp a montré que le problème TSP était NP-complet. Il est facile de montrer que pour un problème avec N villes, il existe $ \frac{(N-1)!}{2} $ routes possibles, soit environ le nombre estimé de particules fondamentales dans l'univers pour 70 noeuds. Supprimer la contrainte d'une unique visite ne réduit pas la complexité du problème. 
 
 \begin{figure}[h]
 \begin{center}
@@ -135,7 +135,7 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
 	
 	Il convient donc de jouer avec la variation de température pour permettre au système de sortir des minima locaux. En 1953, Metropolis avait déjà développé un algorithme recréant l'évolution d'un métal au cours du recuit. En partant d'un état dont l'énergie est égale à $E_i$, on applique une légère variation de température. À l'équilibre thermique, le système peut se retrouver dans un état j dont l'énergie est $E_j$.
 	
-	La probabilité qu'un solide soit dans un état i avec une énergie $E_i$ à la température T est donnée par : $\mathbb{P}$(\emph{X}=i) = $e^{\frac{-E_i}{k_BT}}$/$\sum_{\substack{j}}$$e^{\frac{-E_j}{k_BT}}$. Plus l'énergie de l'état i est faible par rapport à celle des états j, plus le système a des chances de se retrouver dans cet état. C'est pourquoi Metropolis choisit de fixer la probabilité d'acceptation d'un passage A de l'état i à j à la température T par $\mathbb{P}$(A) = $e^\frac{(E_i-E_j)}{k_BT}$.
+	La probabilité qu'un solide soit dans un état i avec une énergie $E_i$ à la température T est donnée par : $\mathbb{P}$(\emph{X}=i) = $e^{\frac{-E_i}{k_BT}} / \sum_{j=0} e^{\frac{-E_j}{k_BT}}$. Plus l'énergie de l'état i est faible par rapport à celle des états j, plus le système a des chances de se retrouver dans cet état. C'est pourquoi Metropolis choisit de fixer la probabilité d'acceptation d'un passage A de l'état i à j à la température T par $\mathbb{P}$(A) = $e^\frac{(E_i-E_j)}{k_BT}$.
 	
 	\vspace{1cm}
 	
@@ -192,8 +192,8 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 		\caption{Exemple de graphe à 5 noeuds}
 	\end{table}
 
-Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie correspondant à la route définie par les noeuds $ 0\rightarrow 2\rightarrow 4\rightarrow 1\rightarrow 3 $ vaut 3+5+1+8+4 donc 21. On se réfère ici à une indexation Java, commençant à 0. De plus, comme c'est le cas pour ce graphe, tous les problèmes traités dans ce document seront symétriques.
-	Pour ce qui est de la mutation, nous utiliserons 2-opt car c'est la mutation sur TSP qui modifie le moins d'arêtes, à savoir 2, entre l'état courant et l'état muté. Nous démontrons en figure~\ref{mutations} que c'est la mutation la plus efficace face à des mutations qui modifient davantage d'arêtes.
+		Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie correspondant à la route définie par les noeuds $ 0\rightarrow 2\rightarrow 4\rightarrow 1\rightarrow 3 $ vaut 3+5+1+8+4 donc 21. On se réfère ici à une indexation Java, commençant à 0. De plus, comme c'est le cas pour ce graphe, tous les problèmes traités dans ce document seront symétriques.
+		Pour ce qui est de la mutation, nous utiliserons 2-opt car c'est la mutation sur TSP qui modifie le moins d'arêtes, à savoir 2, entre l'état courant et l'état muté. Nous démontrons en figure~\ref{mutations} que c'est la mutation la plus efficace face à des mutations qui modifient davantage d'arêtes.
 		La mutation 2-opt consiste à choisir deux noeuds i et j différents de la route, à les échanger et à échanger les noeuds 'intermédiaires', autrement dit d'échanger le noeud suivant i et le noeud précédent j, etc... L'implémentation de cette mutation est expliquée sur la figure ~\ref{2opt}.
 	
 	\begin{figure}[!h]
@@ -214,7 +214,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	\end{center}
 	\end{figure}
 			
-			L'étude de l'influence des paramètres est primordiale si l'on souhaite exécuter un recuit efficace. Pour un recuit simulé, étant donné que K est fixé, le seul paramètre à prendre en compte est la température. Mais ce paramètre n'est pas fixe, il décroît et il y a donc trois données à définir : la température de début $ T_{deb} $, la température de fin $T_{fin} $ et le mode de décroissance. On s'est très vite aperçu, et cela est parfaitement cohérent, que fixer une fonction température $ T_{n} $ ne donnait pas des résultats satisfaisants sur tous les benchmarks. Cette expérience est décrite dans le tableau ~\ref{perf_random_sa} où on pose $ T_{deb} = 1000 $ , décroissance exponentielle avec un facteur de décroissance de 0.99. La température de fin est très proche de 0. On a $ T_{n} = 1000 \times 0.99^{n} $ avec n = $0..100 \times 58 \times 58 $
+			L'étude de l'influence des paramètres est primordiale si l'on souhaite exécuter un recuit efficace. Pour un recuit simulé, étant donné que $ K_{B} $ est fixé, le seul paramètre à prendre en compte est la température. Mais ce paramètre n'est pas fixe, il décroît et il y a donc trois données à définir : la température de début $ T_{deb} $, la température de fin $T_{fin} $ et le mode de décroissance. On s'est très vite aperçu, et cela est parfaitement cohérent, que fixer une fonction température $ T_{n} $ ne donnait pas des résultats satisfaisants sur tous les benchmarks. Cette expérience est décrite dans le tableau ~\ref{perf_random_sa} où on pose $ T_{deb} = 1000 $ , décroissance exponentielle avec un facteur de décroissance de 0.99. La température de fin est très proche de 0. On a $ T_{n} = 1000 \times 0.99^{n} $ avec n = $0..100 \times 58 \times 58 $
 			
 	\begin{figure}[!h]
 	\begin{center}
@@ -230,7 +230,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 		
 		On va, pour cela, essayer de trouver un algorithme qui détermine correctement la température du recuit en fonction du graphe traité : un paramétreur universel.
 		Rappelons rapidement quel est le rôle de la température. Elle ajuste la valeur de la probabilité d'acceptation lorsque la mutation nous dirige vers un état plus haut en énergie : $ p = e^{-\frac{\Delta E}{KT}} $. Il faut paramétrer de telle sorte que les probabilités d'acceptation soient quasi-idéales pour une bonne utilisation du recuit. Sur une évaluation, $ p $  dépend donc de $ \Delta E $ et de $ T $. 
-		Pour concevoir notre paramétreur, on va émettre deux hypothèses importantes. Tout d'abord, on émet l'hypothèse que l'efficacité du recuit simulé dans son ensemble dépend de $ T_{n} $ et de la distribution globale de toutes les différences d'énergie $ \Delta E $ engendrées par des 2-opt sur le graphe. On construira donc un échantillon trié de 1000 $ \Delta E $. Dans un second temps, on suppose qu'il existe un intervalle $ \Delta E_{i} \leq T_{n} \leq \Delta E_{j} $ où le recuit est efficace pour tout graphe. Autrement dit, on veut trouver i et j universels. 
+		Pour concevoir notre paramétreur, on va émettre deux hypothèses importantes. Tout d'abord, on émet l'hypothèse que l'efficacité du recuit simulé dans son ensemble dépend de $ T_{n} $ et de la distribution globale de toutes les différences d'énergie $ \Delta E $ engendrées par des 2-opt sur le graphe. On construira donc un échantillon trié de 1000 $ \Delta E $. Dans un second temps, on suppose qu'il existe un intervalle $ \Delta E_{i} \leq T_{n} \leq \Delta E_{j} $ de cette distribution où le recuit est efficace pour tout graphe. Autrement dit, on veut trouver i et j universels. 
 		L'objectif est donc de déterminer ces deux indices désormais. Sur plusieurs benchmarks, on lance des recuits pour une décroissance linéaire, $ T_{fin} = 0 $ avec différentes températures de départ $ T_{deb} = 2.\Delta E_{k} $. On notera les différentes valeurs de k qui donnent les meilleurs recuits pour se faire une idée de l'intervalle [i,j].
 		
 	\begin{figure}[!h]
@@ -277,7 +277,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	\end{center}
 	\end{figure}
 	
-	Les figures ~\ref{perf_lin} et ~\ref{perf_exp} nous fournissent les performances de notre paramétreur sur un lot d'une quinzaine de benchmarks. Si l'on compare avec la figure ~\ref{perf_random_sa}, le pourcentage moyen est clairement amélioré. Seul le graphe brg180 résiste à notre paramétreur : en regardant la matrice des distances de ce benchmark, on s'aperçoit qu'elle est assez particulière : les énergies des arêtes sont très similaires, certaines sont infinies,... Cela crée des discontinuités importantes dans la distribution des $ \Delta E $ et le paramétreur prend souvent une valeur trop élevée pour T sur tout le recuit. A noter que non seulement brg180 se résoud très bien avec T = 0 mais aussi que de telles discontinuités ne peuvent apparaître avec un graphe euclidien.
+	Les figures ~\ref{perf_lin} et ~\ref{perf_exp} nous fournissent les performances de notre paramétreur sur un lot d'une quinzaine de benchmarks en $100n^2 $ itérations. Si l'on compare avec la figure ~\ref{perf_random_sa}, le pourcentage moyen est clairement amélioré. Seul le graphe brg180 résiste à notre paramétreur : en regardant la matrice des distances de ce benchmark, on s'aperçoit qu'elle est assez particulière : les énergies des arêtes sont très similaires, certaines sont infinies,... Cela crée des discontinuités importantes dans la distribution des $ \Delta E $ et le paramétreur prend souvent une valeur trop élevée pour T sur tout le recuit. A noter que non seulement brg180 se résoud très bien avec T = 0 mais aussi que de telles discontinuités ne peuvent apparaître avec un graphe euclidien.
 	
 	\begin{algorithm}[!h] 
 	\caption{Paramétreur linéaire}
@@ -299,7 +299,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	\end{algorithmic}
 	\end{algorithm}
 	
-	L'application du recuit simulé sur TSP pose le problème des paramètres. La recherche de la bonne température pour un seul graphe nécessite déjà de nombreux tests. Nous avons proposé à l'utilisateur une méthode permettant de calibrer automatiquement la température. Cette méthode ne correspond bien évidemment pas au paramétrage idéal. Cependant, si le temps nous est compté, elle évite des tests encombrants pour trouver T et donne une bonne approximation du minimum global. Le temps d'exécution du paramétreur est négligeable comparé à celui du recuit simulé qui ne dépasse jamais quelques secondes pour des graphes de moins de 1000 noeuds traités en plusieurs millions d'évaluations.
+	L'application du recuit simulé sur TSP pose le problème des paramètres. La recherche de la bonne température pour un seul graphe nécessite déjà de nombreux tests. Nous avons proposé à l'utilisateur une méthode permettant de calibrer automatiquement la température. Cette méthode ne correspond bien évidemment pas au paramétrage idéal. Cependant, si le temps nous est compté, elle évite des tests encombrants pour trouver T et donne une bonne approximation du minimum global de notre problème. Le temps d'exécution du paramétreur est négligeable comparé à celui du recuit simulé qui ne dépasse jamais quelques secondes pour des graphes de moins de 1000 noeuds traités en plusieurs millions d'évaluations.
 	
 	
 \clearpage
@@ -330,7 +330,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 		\caption{Matrice de spin de la route $ 0 \rightarrow 1 \rightarrow 3 \rightarrow 2 \rightarrow 4 $}
 	\end{table}
 	
-	Les répliques sont agencées sous forme de chaînage ou de liste en début de recuit. Ainsi, une réplique a deux répliques voisines fixes tout au long de l'algorithme. L'énergie cinétique est proportionnelle aux produits scalaires des matrices de spin entre routes voisines. On a alors $ H_{cin} = J_{\Gamma}.(\sum_{k=0}^P \sum_{i<j} S_{(i,j),k}.S_{(i,j),k+1} + S_{(i,j),P}.S_{(i,j),0})$ où $ P $ est le nombre de répliques. $ \Gamma $ est un paramètre semblable à $ T $ dans la mesure où il faudra savoir définir $ \Gamma_{deb} $ , $ \Gamma_{fin} $ et le mode de décroissance. On utilisera l'expression suivante pour déterminer $ J_{\Gamma} $ : $ J_{\Gamma} = -0.5T.ln(tanh(-\frac{\Gamma}{PT})) $. 
+	Les répliques sont agencées sous forme de chaînage ou de liste en début de recuit. Ainsi, une réplique a deux répliques voisines fixes tout au long de l'algorithme. L'énergie cinétique est proportionnelle aux produits scalaires des matrices de spin entre routes voisines. On a alors $ H_{cin} = J_{\Gamma}.(\sum_{k=1}^P \sum_{i<j} S_{(i,j),k}.S_{(i,j),k+1} + S_{(i,j),P}.S_{(i,j),1})$ où $ P $ est le nombre de répliques. $ \Gamma $ est un paramètre semblable à $ T $ dans la mesure où il faudra savoir définir $ \Gamma_{deb} $ , $ \Gamma_{fin} $ et le mode de décroissance. On utilisera l'expression suivante pour déterminer $ J_{\Gamma} $ : $ J_{\Gamma} = -0.5T.ln(tanh(-\frac{\Gamma}{PT})) $. 
 		L'objectif du recuit quantique est donc de minimiser l'hamiltonien $ H = H_{pot} + H_{cin} = \frac{1}{P}.\sum_{k=0}^P H_{pot,k} + H_{cin} $.
 		
 	\begin{algorithm}[!h] 
@@ -339,7 +339,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	
 	\STATE $p \leftarrow creeParticule$
 	\FOR{$it=0; it < N; it++$}	
-		\FOR{$k=0; k < P; k++$}
+		\FOR{$k=1; k \leq P; k++$}
 			\STATE $sol \leftarrow p.getReplique(k) $
 			\STATE $sol \leftarrow mutation( sol ) $
 			\STATE $\Delta{E} \leftarrow E_j-E_i+\Delta{E_{cin}}$
@@ -378,7 +378,7 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	
 	\vspace{1cm}
 	
-	Le dernier paramètre auquel il faut s'intéresser est $ \Gamma $. Nous avons décidé de paramétrer universellement $ \Gamma $ comme nous l'avons fait avec $ T $. La méthode est assez similaire : on va déterminer sa valeur en fonction de l'échantillon des $ \Delta E $. On suppose qu'il existe un k universel idéal tel que $ \Delta E_{cin} = \frac{\Delta E_{k}}{P} $ en fin de recuit. La variation élémentaire de $ \Delta E_{cin} $ vaut $ 4J_{\Gamma} $ : le terme 4 provient du fait que, lors de la modification d'une arête, chaque route a deux voisins et les valeurs de spin passent de +1 à -1. On obtient donc la relation : $ J_{\Gamma} = \frac{\Delta E_{k}}{4P} $. Cette relation est valable pour la dernière itération du QA. On en déduira donc $ \Gamma_{fin} $. On pose arbitrairement $ \Gamma_{fin} = 100\Gamma_{fin} $. 
+	Le dernier paramètre auquel il faut s'intéresser est $ \Gamma $. Nous avons décidé de paramétrer universellement $ \Gamma $ comme nous l'avons fait avec $ T $. La méthode est assez similaire : on va déterminer sa valeur en fonction de l'échantillon des $ \Delta E $ engendrés par des 2-opt. On suppose qu'il existe un k universel idéal tel que $ \Delta E_{cin} = \frac{\Delta E_{k}}{P} $ en fin de recuit où $ \Delta E_{k} $ est un élément de l'échantillon. La variation élémentaire de $ \Delta E_{cin} $ vaut $ 4J_{\Gamma} $ : le terme 4 provient du fait que, lors de la modification d'une arête, chaque route a deux voisins et les valeurs de spin passent de +1 à -1. On obtient donc la relation : $ J_{\Gamma_{fin}} = \frac{\Delta E_{k}}{4P} $. Cette relation est valable pour la dernière itération du QA. On en déduira donc $ \Gamma_{fin} $. On pose arbitrairement $ \Gamma_{deb} = 100\Gamma_{fin} $. 
 	On détermine la valeur de k à l'aide d'expériences sur différents benchmarks. Comme l'illustre la figure ~\ref{gamma}, la valeur k = 200 convient parfaitement. A noter que le paramétrage de $ \Gamma $ est bien moins important que celui de T : ici, l'énergie varie seulement de quelques unités pour les différents paramétrages.
 	
 	\begin{figure}[!h]
