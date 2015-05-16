@@ -214,7 +214,7 @@ Dans la section suivante, nous montrerons comment nous sommes parvenus à fixer 
 	\end{center}
 	\end{figure}
 			
-			L'étude de l'influence des paramètres est primordiale si l'on souhaite exécuter un recuit efficace. Pour un recuit simulé, étant donné que $ K_{B} $ est fixé, le seul paramètre à prendre en compte est la température. Mais ce paramètre n'est pas fixe, il décroît et il y a donc trois données à définir : la température de début $ T_{deb} $, la température de fin $T_{fin} $ et le mode de décroissance. On s'est très vite aperçu, et cela est parfaitement cohérent, que fixer une fonction température $ T_{n} $ ne donnait pas des résultats satisfaisants sur tous les benchmarks. Cette expérience est décrite dans le tableau ~\ref{perf_random_sa} où on pose $ T_{deb} = 1000 $ , décroissance exponentielle avec un facteur de décroissance de 0.99. La température de fin est très proche de 0. On a $ T_{n} = 1000 \times 0.99^{n} $ avec n = $0..100 \times 58 \times 58 $
+			L'étude de l'influence des paramètres est primordiale si l'on souhaite exécuter un recuit efficace. Pour un recuit simulé, étant donné que $ K_{B} $ est fixé, le seul paramètre à prendre en compte est la température. Mais ce paramètre n'est pas fixe, il décroît et il y a donc trois données à définir : la température de début $ T_{deb} $, la température de fin $T_{fin} $ et le mode de décroissance. On s'est très vite aperçu, et cela est parfaitement cohérent, que fixer une fonction température $ T_{n} $ ne donnait pas des résultats satisfaisants sur tous les benchmarks. Cette expérience est décrite dans le tableau ~\ref{perf_random_sa} où on pose $ T_{deb} = 1000 $ , décroissance exponentielle avec un facteur de décroissance de 0.99. La température de fin est très proche de 0. On a $ T_{n} = 1000 \times 0.99^{n} $ avec n = $0..100 \times (nombre de Noeuds)^2 $
 			
 	\begin{figure}[!h]
 	\begin{center}
@@ -455,8 +455,21 @@ Dans la section suivante, nous montrerons comment nous sommes parvenus à fixer 
 \clearpage	
 \section*{Conclusion}
 
+\vspace{1cm}
+
+		Les algorithmes du recuit simulé et du recuit quantique sont deux méthodes pratiques pour résoudre un problème complexe de manière combinatoire. Le tout est de savoir définir convenablement les différents éléments suivant le problème traité : état, mutation, matrices de spin, température, $ \Gamma $, nombre de répliques... Nous nous sommes concentrés ici sur le problème du voyageur de commerce pour que l'utilisateur puisse identifier les difficultés d'implémentation de ces algorithmes sur un exemple précis. 
+		
+		\vspace{0.5cm}
+		
+		Une grande partie de notre travail a consisté à trouver une méthode satisfaisante pour pouvoir utiliser ces algorithmes de manière immédiate et automatique, sans avoir à se soucier du graphe que l'on manipule. Le paramétreur universel permet à l'utilisateur qui souhaite travailler consécutivement sur un grand nombre d'instances de ne pas se soucier de T ou $ \Gamma $. Ce paramétreur ne saurait bien évidemment retourner les valeurs idéales de ces deux grandeurs tant elles dépendent de la particularité du graphe traité (profondeur et densité des minima locaux notamment). Néanmoins, il constitue un gain de temps considérable et, comme nous l'avons montré, surpasse de loin les performances d'un paramétrage aléatoire et indépendant de ce qui est donné à l'algorithme.
+		
+		\vspace{0.5cm}
+		
+		Le but de ce document était également de comparer ces deux méta-heuristiques. A cette question, on ne peut donner de réponse directe. Le recuit simulé est clairement recommandé si l'utilisateur s'attaque à un problème pour un faible nombre d'itérations (c'est-à-dire un faible temps de calcul). Il permet de creuser davantage et plus rapidement vers un minimum local. En revanche, dans le cas où on chercherait à approfondir la recherche d'un minimum global à un nombre plus grand d'itérations, le recuit quantique sera préféré car le terme cinétique de l'hamiltonien de la particule permet d'explorer le voisinage de tous les minima locaux. Les répliques, en se rapprochant, auront peut-être une chance de trouver un minimum plus bas en énergie sur leur chemin. On ne peut donc affirmer qu'un algorithme surpasse l'autre : tout dépend du temps dont on dispose pour exécuter notre heuristique.
+
 \clearpage	
 \listoffigures
 \listofalgorithms
 \bibliography{thebibliography}
+
 \end{document}
