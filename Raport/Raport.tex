@@ -304,7 +304,90 @@ Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie corres
 	
 \clearpage
 \section{Recuit Quantique}
-\subsection{Fonctionement}
+\subsection{Fonctionnement}
+
+	\vspace{1cm}
+	
+	Le recuit quantique est un méta-heuristique qui approfondit le modèle du recuit simulé. Il nous faut d'abord évoquer ce qu'on pourrait appeler un recuit simulé 'en parallèle' ou SA parallèle qui, au lieu de travailler sur un seul état, traiterait plusieurs états en même temps. On aurait alors le choix entre appliquer, sur un problème, un recuit simulé pour $ 10.n^2 $ itérations ou un recuit parallèle de 10 répliques, chacune en $ n^2 $ itérations. On appelle particule l'ensemble de ces 10 répliques. L'avantage du SA parallèle est de dompter, plus que ce que fait le SA classique, le côté combinatoire de ces heuristiques. Par exemple, s'il existe un graphe avec 10 minimums locaux profonds en énergie, le SA classique va se bloquer dans l'un de ces minima alors que le SA parallèle va en explorer plusieurs. Par contre, la décroissance du SA parallèle en énergie est plus lente que pour un recuit simulé classique.
+	Le recuit quantique ou QA est un SA en parallèle dont l'hamiltonien a deux composantes : potentielle et cinétique. La composante cinétique est calculé à partir des matrices de spin des états de la particule. Pour TSP, la matrice de spin notée S d'une route est une matrice triangulaire supérieure. Pour $ i < j $, on ajoute 1 aux indices (i,j) si l'arête correspondante appartient à la route, -1 sinon. La diagonale est constituée de zéros. 
+	
+	\begin{table}[hp]
+		\centering
+			\begin{tabular}{|*{5}{c|}}
+					\hline
+					0  & 1  & -1 & -1 & 1 \\
+					\hline
+					0  & 0 & -1 & 1 & -1 \\
+					\hline
+					0  & 0 & 0 & 1 & 1 \\
+					\hline
+					0  & 0 & 0 & 0 & -1 \\
+					\hline
+					0  & 0 & 0 & 0 & 0 \\
+					\hline
+			\end{tabular}
+		\label{spin}
+		\caption{Matrice de spin de la route $ 0 \rightarrow 1 \rightarrow 3 \rightarrow 2 \rightarrow 4 $}
+	\end{table}
+	
+	Les répliques sont agencées sous forme de chaînage ou de liste en début de recuit. Ainsi, une réplique a deux répliques voisines fixes tout au long de l'algorithme. L'énergie cinétique est proportionnelle aux produits scalaires des matrices de spin entre routes voisines. On a alors $ H_{cin} = J_{\Gamma}.(\sum_{k=0}^P \sum_{i<j} S_{(i,j),k}.S_{(i,j),k+1} + S_{(i,j),P}.S_{(i,j),0})$ où $ P $ est le nombre de répliques. $ \Gamma $ est un paramètre semblable à $ T $ dans la mesure où il faudra savoir définir $ \Gamma_{deb} $ , $ \Gamma_{fin} $ et le mode de décroissance. On utilisera l'expression suivante pour déterminer $ J_{\Gamma} $ : $ J_{\Gamma} = -0.5T.ln(tanh(-\frac{\Gamma}{PT})) $. 
+		L'objectif du recuit quantique est donc de minimiser l'hamiltonien $ H = H_{pot} + H_{cin} = \frac{1}{P}.\sum_{k=0}^P H_{pot,k} + H_{cin} $.
+		
+	\begin{algorithm}[!h] 
+	\caption{Recuit Quantique}
+	\begin{algorithmic}
+	
+	\STATE $p \leftarrow creeParticule$
+	\FOR{$it=0; it < N; it++$}	
+		\FOR{$k=0; k < P; k++$}
+			\STATE $sol \leftarrow p.getReplique(k) $
+			\STATE $sol \leftarrow mutation( sol ) $
+			\STATE $\Delta{E} \leftarrow E_j-E_i+\Delta{E_{cin}}$
+			\IF{$\Delta{E}\prec{0}$} 
+				\STATE Accepter cette mutation	
+			\ELSE 
+				\STATE Ne l'accepter qu'avec une probabilité égale à $\mathbb{P}$(A)
+			\ENDIF
+			\STATE Choisir $T_{k+1}$ plus petit que $T_{k}$
+			\STATE Choisir $\Gamma_{k+1}$ plus petit que $\Gamma_{k}$
+			\STATE Modifier l'ordre de parcours des répliques sans modifier le chainage
+		\ENDFOR
+	\ENDFOR
+	\STATE $ bestSol \leftarrow p.getMeilleureReplique $
+	\RETURN $ bestSol $
+	
+	\end{algorithmic}
+	\end{algorithm}
+		
+		\vspace{1cm}
+
+\subsection{Réglages et paramètres}
+
+\vspace{1cm}
+
+	Le réglage de la température se fait avec le paramétreur présenté dans le chapitre 'Recuit Simulé'. On pose $ T = \Delta E_{50} $ (cinquième centile de la distribution des $ \Delta E $)
+	Un facteur important à régler est le nombre de répliques à utiliser. Le nombre de répliques idéal dépend du nombre de noeuds du graphe que l'on traite et du nombre d'itérations. Traiter un graphe de 100 noeuds en $ 10.n^2 $ ne nécessite pas d'employer le même nombre de répliques qu'avec $ 100.n^2 $. On effectue cette expérience sur un graphe de 52 noeuds : on trace le résultat en fonction du nombre de répliques pour différentes valeurs du nombre d'itérations sur la figure ~\ref{berlin52_nbRepliques}. Pour la courbe bleue, le nombre de répliques idéal est 1. En revanche, lorsque le nombre d'évaluations augmente (courbe noire), le nombre de répliques idéal est proche de 10.
+	
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.25]{berlin52_nbRepliques.png}
+	\caption{Performance du recuit quantique en fonction de P en $ 5n^2 $ (bleu) , $ 20n^2 $ (rouge) et $ 60n^2 $ (noir)}
+	\label{berlin52_nbRepliques}
+	\end{center}
+	\end{figure}
+	
+	\vspace{1cm}
+	
+	Le dernier paramètre auquel il faut s'intéresser est $ \Gamma $. Nous avons décidé de paramétrer universellement $ \Gamma $ comme nous l'avons fait avec $ T $. La méthode est assez similaire : on va déterminer sa valeur en fonction de l'échantillon des $ \Delta E $. On suppose qu'il existe un k universel idéal tel que $ \Delta E_{cin} = \frac{\Delta E_{k}}{P} $ en fin de recuit. La variation élémentaire de $ \Delta E_{cin} $ vaut $ 4J_{\Gamma} $ : le terme 4 provient du fait que, lors de la modification d'une arête, chaque route a deux voisins et les valeurs de spin passent de +1 à -1. On obtient donc la relation : $ J_{\Gamma} = \frac{\Delta E_{k}}{4P} $. Cette relation est valable pour la dernière itération du QA. On en déduira donc $ \Gamma_{fin} $. On pose arbitrairement $ \Gamma_{fin} = 100\Gamma_{fin} $. 
+	On détermine la valeur de k à l'aide d'expériences sur différents benchmarks. Comme l'illustre la figure ~\ref{gamma}, la valeur k = 200 convient parfaitement. A noter que le paramétrage de $ \Gamma $ est bien moins important que celui de T : ici, l'énergie varie seulement de quelques unités pour les différents paramétrages.
+	
+	\begin{figure}[!h]
+	\begin{center}
+	\includegraphics[scale=0.25]{gamma.png}
+	\caption{Performance du recuit quantique en fonction de $ J_{fin} $}
+	\label{gamma}
+	\end{center}
+	\end{figure}
 
 
 \clearpage

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.14)  16 MAY 2015 00:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.14)  16 MAY 2015 18:55
 entering extended mode
 **Raport.tex
 (C:\Users\Pierre\Documents\Raport\Raport.tex
@@ -530,55 +530,80 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [10 <C:/Users/Pierre/Documents/Raport/bier127_zonecritique.jpg> <C:/Users/Pierre/Documents/Raport/a280_zonecritique.jpg>
 ] [11 <C:/Users/Pierre/Documents/Raport/perf_lin.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/perf_exp.png (PNG cop
-y)>] [12] [13
+y)>] [12]
+Overfull \hbox (31.92712pt too wide) in paragraph at lines 333--335
+\T1/cmr/m/n/10 trices de spin entre routes voi-sines. On a alors $\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/1
+0 J[]:\OT1/cmr/m/n/10 ([][] [][] \OML/cmm/m/it/10 S[]:S[] \OT1/cmr/m/n/10 +
+ []
 
-] <comparaison_pr76.jpg, id=75, 1310.8975pt x 611.28375pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[13
+
+] <berlin52_nbRepliques.png, id=75, 1186.4325pt x 553.06625pt>
+File: berlin52_nbRepliques.png Graphic file (type png)
+ <use berlin52_nbRepliques.png>
+Package pdftex.def Info: berlin52_nbRepliques.png used on input line 373.
+(pdftex.def)             Requested size: 296.60739pt x 138.26622pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14] <gamma.png, id=79, 1180.41pt x 611.28375pt>
+File: gamma.png Graphic file (type png)
+ <use gamma.png>
+Package pdftex.def Info: gamma.png used on input line 386.
+(pdftex.def)             Requested size: 295.10178pt x 152.82056pt.
+ [15 <C:/Users/Pierre/Documents/Raport/berlin52_nbRepliques.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/gamma.png 
+(PNG copy)>]
+<comparaison_pr76.jpg, id=83, 1310.8975pt x 611.28375pt>
 File: comparaison_pr76.jpg Graphic file (type jpg)
  <use comparaison_pr76.jpg>
-Package pdftex.def Info: comparaison_pr76.jpg used on input line 323.
+Package pdftex.def Info: comparaison_pr76.jpg used on input line 406.
 (pdftex.def)             Requested size: 327.72357pt x 152.82056pt.
- [14
+ [16
 
- <C:/Users/Pierre/Documents/Raport/comparaison_pr76.jpg>] <rapprochement.jpg, id=79, 1215.54124pt x 562.1pt>
+ <C:/Users/Pierre/Documents/Raport/comparaison_pr76.jpg>] <rapprochement.jpg, id=87, 1215.54124pt x 562.1pt>
 File: rapprochement.jpg Graphic file (type jpg)
  <use rapprochement.jpg>
-Package pdftex.def Info: rapprochement.jpg used on input line 334.
+Package pdftex.def Info: rapprochement.jpg used on input line 417.
 (pdftex.def)             Requested size: 364.66519pt x 168.6313pt.
 
-Overfull \hbox (19.66519pt too wide) in paragraph at lines 334--335
+Overfull \hbox (19.66519pt too wide) in paragraph at lines 417--418
  [] 
  []
 
-<zoom_pr76.jpg, id=80, 1246.6575pt x 585.18625pt>
+<zoom_pr76.jpg, id=88, 1246.6575pt x 585.18625pt>
 File: zoom_pr76.jpg Graphic file (type jpg)
  <use zoom_pr76.jpg>
-Package pdftex.def Info: zoom_pr76.jpg used on input line 347.
+Package pdftex.def Info: zoom_pr76.jpg used on input line 430.
 (pdftex.def)             Requested size: 311.6636pt x 146.2962pt.
 
-<brazil58_zoom.jpg, id=81, 1222.5675pt x 565.11125pt>
+<brazil58_zoom.jpg, id=89, 1222.5675pt x 565.11125pt>
 File: brazil58_zoom.jpg Graphic file (type jpg)
  <use brazil58_zoom.jpg>
-Package pdftex.def Info: brazil58_zoom.jpg used on input line 362.
+Package pdftex.def Info: brazil58_zoom.jpg used on input line 445.
 (pdftex.def)             Requested size: 305.64113pt x 141.27747pt.
- [15 <C:/Users/Pierre/Documents/Raport/rapprochement.jpg>] [16 <C:/Users/Pierre/Documents/Raport/zoom_pr76.jpg> <C:/User
-s/Pierre/Documents/Raport/brazil58_zoom.jpg>] [17
+ [17 <C:/Users/Pierre/Documents/Raport/rapprochement.jpg>] [18 <C:/Users/Pierre/Documents/Raport/zoom_pr76.jpg> <C:/User
+s/Pierre/Documents/Raport/brazil58_zoom.jpg>] [19
 
 ] (C:\Users\Pierre\Documents\Raport\Raport.lof)
 \tf@lof=\write4
  (C:\Users\Pierre\Documents\Raport\Raport.loa)
 \tf@loa=\write5
 
-(C:\Users\Pierre\Documents\Raport\Raport.bbl) [18
+(C:\Users\Pierre\Documents\Raport\Raport.bbl) [20
 
 ] (C:\Users\Pierre\Documents\Raport\Raport.aux) ) 
 Here is how much of TeX's memory you used:
- 3566 strings out of 493921
- 43672 string characters out of 3146477
- 103218 words of memory out of 3000000
- 6779 multiletter control sequences out of 15000+200000
+ 3578 strings out of 493921
+ 43905 string characters out of 3146477
+ 108218 words of memory out of 3000000
+ 6790 multiletter control sequences out of 15000+200000
  16733 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,7n,24p,920b,518s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 27i,7n,24p,968b,596s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
 dpi600\ecti1000.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\
 Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.
@@ -593,9 +618,9 @@ b><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Use
 ic/amsfonts/cm/cmsy10.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Pierre/Deskt
 op/Latex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on Raport.pdf (18 pages, 999486 bytes).
+Output written on Raport.pdf (20 pages, 1047506 bytes).
 PDF statistics:
- 385 PDF objects out of 1000 (max. 8388607)
+ 395 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 71 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

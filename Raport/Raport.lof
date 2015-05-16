@@ -9,7 +9,9 @@
 \contentsline {figure}{\numberline {8}{\ignorespaces Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur a280}}{10}
 \contentsline {figure}{\numberline {9}{\ignorespaces Performance du recuit avec le param\IeC {\'e}treur en d\IeC {\'e}croissance lin\IeC {\'e}aire}}{11}
 \contentsline {figure}{\numberline {10}{\ignorespaces Performance du recuit avec le param\IeC {\'e}treur en d\IeC {\'e}croissance exponentielle}}{11}
-\contentsline {figure}{\numberline {11}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{14}
-\contentsline {figure}{\numberline {12}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{15}
-\contentsline {figure}{\numberline {13}{\ignorespaces Meilleures Energies des derni\IeC {\`e}res it\IeC {\'e}rations des exp\IeC {\'e}riences SA et QA}}{16}
-\contentsline {figure}{\numberline {14}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{16}
+\contentsline {figure}{\numberline {11}{\ignorespaces Performance du recuit quantique en fonction de P en $ 5n^2 $ (bleu) , $ 20n^2 $ (rouge) et $ 60n^2 $ (noir)}}{15}
+\contentsline {figure}{\numberline {12}{\ignorespaces Performance du recuit quantique en fonction de $ J_{fin} $}}{15}
+\contentsline {figure}{\numberline {13}{\ignorespaces Evolution des \IeC {\'e}nergies sur pr76 et rapprochement des r\IeC {\'e}pliques pour QA}}{16}
+\contentsline {figure}{\numberline {14}{\ignorespaces Rapprochement des r\IeC {\'e}pliques pour QA et SA parall\IeC {\`e}le sur pr76}}{17}
+\contentsline {figure}{\numberline {15}{\ignorespaces Meilleures Energies des derni\IeC {\`e}res it\IeC {\'e}rations des exp\IeC {\'e}riences SA et QA}}{18}
+\contentsline {figure}{\numberline {16}{\ignorespaces Evolution de l'\IeC {\'e}nergie sur SA, SA parall\IeC {\`e}le et QA en fin de recuit}}{18}
