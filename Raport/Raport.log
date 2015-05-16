@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.14)  16 MAY 2015 19:38
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.14)  16 MAY 2015 21:59
 entering extended mode
 **Raport.tex
-(C:\Users\Pierre\Documents\Raport\Raport.tex
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
 , bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
@@ -10,9 +10,9 @@ ian, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, icelandic, 
 -x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, romanian, russian, sanskrit, serbian, slovak, sloven
 ian, spanish, swedish, swissgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usenglishmax, w
 elsh, loaded.
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\article.cls
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\size10.clo
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -26,22 +26,25 @@ File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (C:\Users\Pierre\Desktop\Latex\tex\latex\amsmath\amsmath.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(C:\Users\Pierre\Desktop\Latex\tex\latex\amsmath\amstext.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01
- (C:\Users\Pierre\Desktop\Latex\tex\latex\amsmath\amsgen.sty
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks14
 \ex@=\dimen103
-)) (C:\Users\Pierre\Desktop\Latex\tex\latex\amsmath\amsbsy.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\amsmath\amsopn.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
@@ -82,41 +85,41 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\amsfonts\amsfonts.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\amsfonts\amssymb.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\graphics\graphicx.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\graphics\keyval.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks19
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\graphics\graphics.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\graphics\trig.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\00miktex\graphics.cfg
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\pdftex-def\pdftex.def
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(C:\Users\Pierre\Desktop\Latex\tex\generic\oberdiek\infwarerr.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(C:\Users\Pierre\Desktop\Latex\tex\generic\oberdiek\ltxcmds.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count99
@@ -127,14 +130,15 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty"
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating environment
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\float\float.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count100
 \float@exts=\toks20
 \float@box=\box28
 \@float@everytoks=\toks21
 \@floatcapt=\box29
-) (C:\Users\Pierre\Desktop\Latex\tex\latex\base\ifthen.sty
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks22
@@ -149,18 +153,18 @@ Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
 \ALC@tlm=\skip46
 \algorithmicindent=\skip47
 )
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\inputenc.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
 \inpenc@prehook=\toks23
 \inpenc@posthook=\toks24
- (C:\Users\Pierre\Desktop\Latex\tex\latex\base\utf8.def
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
-
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\t1enc.dfu
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.dfu"
 File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -309,7 +313,7 @@ File: t1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
- (C:\Users\Pierre\Desktop\Latex\tex\latex\base\ot1enc.dfu
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ot1enc.dfu"
 File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -340,7 +344,7 @@ File: ot1enc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
 Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\omsenc.dfu
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omsenc.dfu"
 File: omsenc.dfu 2008/04/05 v1.1m UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
@@ -363,24 +367,27 @@ Now handling font encoding U ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-)) (C:\Users\Pierre\Desktop\Latex\tex\latex\base\fontenc.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(C:\Users\Pierre\Desktop\Latex\tex\latex\base\t1enc.def
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1enc.def"
 File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
-)) (C:\Users\Pierre\Desktop\Latex\tex\generic\babel\babel.sty
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
 Package: babel 2008/07/08 v3.8m The Babel package
 
 *************************************
 * Local config file bblopts.cfg used
 *
-(C:\Users\Pierre\Desktop\Latex\tex\latex\00miktex\bblopts.cfg
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-(C:\Users\Pierre\Desktop\Latex\tex\generic\babel\frenchb.ldf
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\frenchb.ldf"
 Language: frenchb 2009/03/16 v2.3d French support from the babel system
- (C:\Users\Pierre\Desktop\Latex\tex\generic\babel\babel.def
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
 File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count106
 \U@D=\dimen114
@@ -393,13 +400,15 @@ Package babel Info: Making ? an active character on input line 123.
 \std@mcc=\count107
 \dec@mcc=\count108
 \parindentFFN=\dimen116
+
 *************************************
 * Local config file frenchb.cfg used
 *
-(C:\Users\Pierre\Desktop\Latex\tex\generic\babel\frenchb.cfg)))
-(C:\Users\Pierre\Desktop\Latex\tex\latex\carlisle\scalefnt.sty)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\frenchb.cfg")))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
 \c@theorem=\count109
- (C:\Users\Pierre\Documents\Raport\Raport.aux)
+
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 62.
 LaTeX Font Info:    ... okay on input line 62.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 62.
@@ -431,37 +440,36 @@ LaTeX Info: Redefining \degres on input line 62.
 LaTeX Info: Redefining \dots on input line 62.
 LaTeX Info: Redefining \up on input line 62.
 LaTeX Font Info:    Try loading font information for U+msa on input line 67.
- (C:\Users\Pierre\Desktop\Latex\tex\latex\amsfonts\umsa.fd
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 67.
- (C:\Users\Pierre\Desktop\Latex\tex\latex\amsfonts\umsb.fd
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
+
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] (C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.toc
 )
-[1
-
-{C:/Users/Pierre/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] (C:\Users\Pierre\Documents\Raport\Raport.toc)
 \tf@toc=\write3
-
-[2
+ [2
 
 ] [3
 
-] <pr1002.png, id=16, 674.52pt x 466.74374pt>
+]
+<pr1002.png, id=16, 674.52pt x 466.74374pt>
 File: pr1002.png Graphic file (type png)
  <use pr1002.png>
 Package pdftex.def Info: pr1002.png used on input line 100.
 (pdftex.def)             Requested size: 269.80322pt x 186.69418pt.
  [4
 
- <C:/Users/Pierre/Documents/Raport/pr1002.png>]
-<cartes.png, id=28, 1126.2075pt x 423.5825pt>
+ <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/pr1002.png>] <cartes.png, id=28, 1126.2075pt x 423.5825pt>
 File: cartes.png Graphic file (type png)
  <use cartes.png>
 Package pdftex.def Info: cartes.png used on input line 118.
 (pdftex.def)             Requested size: 337.86487pt x 127.07573pt.
- [5 <C:/Users/Pierre/Documents/Raport/cartes.png>]
-[6
+ [5 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/cartes.png>] [6
 
 ] [7] <2opt.png, id=48, 670.505pt x 218.8175pt>
 File: 2opt.png Graphic file (type png)
@@ -484,14 +492,14 @@ Package pdftex.def Info: perf_random_sa.png used on input line 221.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[8 <C:/Users/Pierre/Documents/Raport/2opt.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/pr1002_mutation.jpg>]
-<gr24_zonecritique.jpg, id=54, 1220.56pt x 577.15625pt>
+[8 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/2opt.png (PNG copy)> <C:/Users/Belaube/Desktop/rapport/Rappor
+t-master/Raport/pr1002_mutation.jpg>] <gr24_zonecritique.jpg, id=54, 1220.56pt x 577.15625pt>
 File: gr24_zonecritique.jpg Graphic file (type jpg)
- <use gr24_zonecritique.jpg>
+
+<use gr24_zonecritique.jpg>
 Package pdftex.def Info: gr24_zonecritique.jpg used on input line 238.
 (pdftex.def)             Requested size: 305.13925pt x 144.2887pt.
-
-<bier127_zonecritique.jpg, id=55, 1216.545pt x 582.175pt>
+ <bier127_zonecritique.jpg, id=55, 1216.545pt x 582.175pt>
 File: bier127_zonecritique.jpg Graphic file (type jpg)
  <use bier127_zonecritique.jpg>
 Package pdftex.def Info: bier127_zonecritique.jpg used on input line 246.
@@ -509,8 +517,8 @@ Package pdftex.def Info: a280_zonecritique.jpg used on input line 254.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9 <C:/Users/Pierre/Documents/Raport/perf_random_sa.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/gr24_zonecritique.
-jpg>] <perf_lin.png, id=60, 531.9875pt x 189.70876pt>
+[9 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/perf_random_sa.png (PNG copy)> <C:/Users/Belaube/Desktop/rapp
+ort/Rapport-master/Raport/gr24_zonecritique.jpg>] <perf_lin.png, id=60, 531.9875pt x 189.70876pt>
 File: perf_lin.png Graphic file (type png)
  <use perf_lin.png>
 Package pdftex.def Info: perf_lin.png used on input line 266.
@@ -528,12 +536,13 @@ Package pdftex.def Info: perf_exp.png used on input line 274.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10 <C:/Users/Pierre/Documents/Raport/bier127_zonecritique.jpg> <C:/Users/Pierre/Documents/Raport/a280_zonecritique.jpg>
-] [11 <C:/Users/Pierre/Documents/Raport/perf_lin.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/perf_exp.png (PNG cop
-y)>] [12]
-Overfull \hbox (31.92712pt too wide) in paragraph at lines 333--335
+[10 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/bier127_zonecritique.jpg> <C:/Users/Belaube/Desktop/rapport/
+Rapport-master/Raport/a280_zonecritique.jpg>] [11 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/perf_lin.png (
+PNG copy)> <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/perf_exp.png (PNG copy)>] [12]
+Overfull \hbox (58.0695pt too wide) in paragraph at lines 333--335
 \T1/cmr/m/n/10 trices de spin entre routes voi-sines. On a alors $\OML/cmm/m/it/10 H[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/1
-0 J[]:\OT1/cmr/m/n/10 ([][] [][] \OML/cmm/m/it/10 S[]:S[] \OT1/cmr/m/n/10 +
+0 J[]:\OT1/cmr/m/n/10 ([][] \OML/cmm/m/it/10 P \OMS/cmsy/m/n/10   \OT1/cmr/m/n/10 1) [][] \OML/cmm/m/it/10 S[]:S[] \OT1/
+cmr/m/n/10 +
  []
 
 
@@ -555,18 +564,19 @@ File: gamma.png Graphic file (type png)
  <use gamma.png>
 Package pdftex.def Info: gamma.png used on input line 386.
 (pdftex.def)             Requested size: 295.10178pt x 152.82056pt.
- [15 <C:/Users/Pierre/Documents/Raport/berlin52_nbRepliques.png (PNG copy)> <C:/Users/Pierre/Documents/Raport/gamma.png 
-(PNG copy)>]
-<comparaison_pr76.jpg, id=83, 1310.8975pt x 611.28375pt>
+ [15 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/berlin52_nbRepliques.png (PNG copy)> <C:/Users/Belaube/Desk
+top/rapport/Rapport-master/Raport/gamma.png (PNG copy)>] <comparaison_pr76.jpg, id=83, 1310.8975pt x 611.28375pt>
 File: comparaison_pr76.jpg Graphic file (type jpg)
  <use comparaison_pr76.jpg>
 Package pdftex.def Info: comparaison_pr76.jpg used on input line 406.
 (pdftex.def)             Requested size: 327.72357pt x 152.82056pt.
  [16
 
- <C:/Users/Pierre/Documents/Raport/comparaison_pr76.jpg>] <rapprochement.jpg, id=87, 1215.54124pt x 562.1pt>
+ <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/comparaison_pr76.jpg>] <rapprochement.jpg, id=87, 1215.54124pt 
+x 562.1pt>
 File: rapprochement.jpg Graphic file (type jpg)
- <use rapprochement.jpg>
+
+<use rapprochement.jpg>
 Package pdftex.def Info: rapprochement.jpg used on input line 417.
 (pdftex.def)             Requested size: 364.66519pt x 168.6313pt.
 
@@ -585,40 +595,43 @@ File: brazil58_zoom.jpg Graphic file (type jpg)
  <use brazil58_zoom.jpg>
 Package pdftex.def Info: brazil58_zoom.jpg used on input line 445.
 (pdftex.def)             Requested size: 305.64113pt x 141.27747pt.
- [17 <C:/Users/Pierre/Documents/Raport/rapprochement.jpg>] [18 <C:/Users/Pierre/Documents/Raport/zoom_pr76.jpg> <C:/User
-s/Pierre/Documents/Raport/brazil58_zoom.jpg>] [19
+ [17 <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/rapprochement.jpg>] [18 <C:/Users/Belaube/Desktop/rapport/R
+apport-master/Raport/zoom_pr76.jpg> <C:/Users/Belaube/Desktop/rapport/Rapport-master/Raport/brazil58_zoom.jpg>] [19
 
-] (C:\Users\Pierre\Documents\Raport\Raport.lof)
+]
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.lof)
 \tf@lof=\write4
- (C:\Users\Pierre\Documents\Raport\Raport.loa)
+
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.loa)
 \tf@loa=\write5
 
-(C:\Users\Pierre\Documents\Raport\Raport.bbl) [20
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.bbl) [20
 
-] (C:\Users\Pierre\Documents\Raport\Raport.aux) ) 
+]
+(C:\Users\Belaube\Desktop\rapport\Rapport-master\Raport\Raport.aux) ) 
 Here is how much of TeX's memory you used:
  3578 strings out of 493921
- 43905 string characters out of 3146477
+ 44535 string characters out of 3144870
  108218 words of memory out of 3000000
  6790 multiletter control sequences out of 15000+200000
  16733 words of font info for 49 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 27i,7n,24p,968b,596s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecti1000.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1000.pk> <C:\Users\
-Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\ecbx1440.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\
-Pierre\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Pierre\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmex10.pf
-b><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/pu
-blic/amsfonts/cm/cmmi5.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Pierre/Desk
-top/Latex/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmr5.pf
-b><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/publ
-ic/amsfonts/cm/cmsy10.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Users/Pierre/Deskt
-op/Latex/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Pierre/Desktop/Latex/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb>
-Output written on Raport.pdf (20 pages, 1047700 bytes).
+ 27i,7n,24p,980b,596s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fonts\p
+k\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\e
+ccc1000.pk> <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Belaube
+\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi6
+00\ecrm1000.pk> <C:\Users\Belaube\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Bel
+aube\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1728.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmmi7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmr7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Raport.pdf (20 pages, 1048005 bytes).
 PDF statistics:
  394 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

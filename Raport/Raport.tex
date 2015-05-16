@@ -91,7 +91,7 @@ Nous définirons dans un premier temps le problème TSP. Nous verrons alors le p
 
 \subsection{Présentation du problème}
 
-Le problème du voyageur de commerce est défini par un ensemble de N points (des villes) séparées entre elles par un poids ou une distance $ d_{i,j} $.
+Le problème du voyageur de commerce est défini par un ensemble de N villes (des noeuds) séparées entre elles par un poids ou une distance $ d_{i,j} $.
 L'objectif est de permettre au voyageur de commerce de trouver la route la plus courte lui permettant de visiter toutes les villes une fois tout en revenant à son point de départ. TSP trouve de nombreuses applications dans le domaine de la logistique mais aussi dans des domaines plus exotiques tels que la conception de bras robotisés, la fabrication de puces électroniques et même le séquençage de l'ADN.
 	En 1972, Richard M. Karp a montré que le problème TSP était NP-complet. Il est facile de montrer que pour un problème avec N villes, il existe $ \frac{(N-1)!}{2} $ routes possibles, soit environ le nombre estimé de particules fondamentales dans l'univers pour 70 noeuds. Supprimer la contrainte d'une unique visite ne réduit pas la complexité du problème. 
 
@@ -122,7 +122,7 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
 
 
       Le lieu où la densité des minima nous intéresse est centré sur le minimum global.  On décide alors de comparer la distance des répliques correspondant à des minima locaux au minimum global seul pour diminuer le temps de calcul.
-      L’idée est donc d’estimer une distance radiale d’un minimum local au minimum global, sans tenir compte a priori de la distance des minima locaux entre eux. Ainsi, chaque minimum global trouvé peut être placé une carte, on place aléatoirement sur un cercle centré sur le minimum global, de rayon son rapprochement au minimum global.
+      L’idée est donc d’estimer une distance radiale d’un minimum local au minimum global, sans tenir compte a priori de la distance des minima locaux entre eux. Ainsi, chaque minimum local trouvé peut être placé une carte. On le place sur un cercle centré sur le minimum global et dont le rayon correspond à sa distance du minimum global.
       L’idée de placer chaque minimum local aléatoirement sur un cercle permet une visualisation en trois dimensions de la densité de minima, et souligne la possibilité d’intégrer une information supplémentaire dans le modèle en jouant sur l’angle aléatoire - par exemple, pour deux minima différents qui ont une distance identique au minimum global, prendre en compte la distance entre eux et en rendre compte dans leur éloignement sur leur cercle.
 
 \clearpage
@@ -135,7 +135,7 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
 	
 	Il convient donc de jouer avec la variation de température pour permettre au système de sortir des minima locaux. En 1953, Metropolis avait déjà développé un algorithme recréant l'évolution d'un métal au cours du recuit. En partant d'un état dont l'énergie est égale à $E_i$, on applique une légère variation de température. À l'équilibre thermique, le système peut se retrouver dans un état j dont l'énergie est $E_j$.
 	
-	La probabilité qu'un solide soit dans un état i avec une énergie $E_i$ à la température T est donnée par : $\mathbb{P}$(\emph{X}=i) = $e^{\frac{-E_i}{k_BT}} / \sum_{j=0} e^{\frac{-E_j}{k_BT}}$. Plus l'énergie de l'état i est faible par rapport à celle des états j, plus le système a des chances de se retrouver dans cet état. C'est pourquoi Metropolis choisit de fixer la probabilité d'acceptation d'un passage A de l'état i à j à la température T par $\mathbb{P}$(A) = $e^\frac{(E_i-E_j)}{k_BT}$.
+	La probabilité qu'un solide soit dans un état i avec une énergie $E_i$ à la température T est donnée par : $\mathbb{P}$(\emph{X}=i) = $e^{\frac{-E_i}{k_BT}} / \sum_{j=0} e^{\frac{-E_j}{k_BT}}$. Plus l'énergie de l'état i est faible par rapport à celle des états j, plus le système a des chances de se retrouver dans cet état. C'est pourquoi Metropolis choisit de fixer la probabilité d'acceptation d'un passage A de l'état i à j à la température T par $\mathbb{P}$(A) = min(1,$e^\frac{(E_i-E_j)}{k_BT}$). On vérifie que cette probabilité vérifie l'équation d'équilibre de Markov. 
 	
 	\vspace{1cm}
 	
@@ -163,14 +163,14 @@ Une nouvelle difficulté apparaît : positionner les répliques les unes par rap
 
 Ainsi, aux hautes températures, le système change d'état quasiment aléatoirement. Il explore la surface d'énergie de manière globale. Lorsque la température décroit, le système a de moins en moins de chance d'accepter de passer dans un état qui augmente son énergie. La recherche d'une solution devient alors locale car l'état courant ne peut plus franchir une barrière d'énergie importante. Plus le refroidissement est lent, plus le système a de chances d'atteindre un état dont l'énergie est proche de l'énergie fondamentale. Le lecteur attentif aura compris que les éléments importants du recuit simulé sont : la température initiale, le taux de décroissance de la température à chaque itération et enfin la nature de la mutation élémentaire. $K_B$ est arbitrairement fixé égal à 1.
 
-Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer les paramètres importants du recuit.
+Dans la section suivante, nous montrerons comment nous sommes parvenus à fixer les paramètres importants du recuit.
 
 \subsection{Implémentation}
 
 \vspace{1cm}
 
 	Pour utiliser cet algorithme sur le problème du voyageur de commerce, il faut commencer par définir les différents éléments indispensables au recuit : l'état, l'énergie et la mutation.
-	Un état est défini comme une solution possible au problème donné. Par exemple, pour le problème SAT, l'état est l'assignation, à chaque variable, d'un booléen. Pour le problème TSP, l'état est une route c'est-à-dire une suite d'arêtes où chaque noeud n'est traversé qu'une seule et unique fois. D'un point de vue informatique, une route sera représentée par une liste de noeuds. Le graphe est représenté par une matrice carrée des distances $ d_{i,j} $. La taille de cette matrice définit le nombre de noeuds dans la route. A chaque état est associée une énergie. Cette énergie correspondra ici à la longueur totale de la route : c'est la somme des longueurs de chacune des arêtes $ (i,j) $ de la route, chaque longueur étant donné par la matrice du graphe.
+	Un état est défini comme une solution possible au problème donné. Par exemple, pour le problème SAT, l'état est l'assignation d'un booléan à chaque variable. Pour le problème TSP, l'état est une route c'est-à-dire une suite d'arêtes où chaque noeud n'est traversé qu'une seule et unique fois. D'un point de vue informatique, une route sera représentée par une liste de noeuds. Le graphe est représenté par une matrice carrée des distances $ d_{i,j} $. La taille de cette matrice définit le nombre de noeuds dans la route. À chaque état est associée une énergie. Cette énergie correspondra ici à la longueur totale de la route : c'est la somme des longueurs de chacune des arêtes $ (i,j) $ de la route, chaque longueur étant donnée par la matrice du graphe.
 	
 	
 	\begin{table}[hp]
@@ -194,7 +194,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 
 		Pour le graphe décrit sur le tableau~\ref{tableau_distances}, l'énergie correspondant à la route définie par les noeuds $ 0\rightarrow 2\rightarrow 4\rightarrow 1\rightarrow 3 $ vaut 3+5+1+8+4 donc 21. On se réfère ici à une indexation Java, commençant à 0. De plus, comme c'est le cas pour ce graphe, tous les problèmes traités dans ce document seront symétriques.
 		Pour ce qui est de la mutation, nous utiliserons 2-opt car c'est la mutation sur TSP qui modifie le moins d'arêtes, à savoir 2, entre l'état courant et l'état muté. Nous démontrons en figure~\ref{mutations} que c'est la mutation la plus efficace face à des mutations qui modifient davantage d'arêtes.
-		La mutation 2-opt consiste à choisir deux noeuds i et j différents de la route, à les échanger et à échanger les noeuds 'intermédiaires', autrement dit d'échanger le noeud suivant i et le noeud précédent j, etc... L'implémentation de cette mutation est expliquée sur la figure ~\ref{2opt}.
+		La mutation 2-opt consiste à choisir deux noeuds i et j différents de la route, à les échanger et à échanger les noeuds 'intermédiaires', autrement dit à échanger le noeud suivant i et le noeud précédent j, etc... L'implémentation de cette mutation est expliquée sur la figure ~\ref{2opt}.
 	
 	\begin{figure}[!h]
 		
@@ -230,13 +230,13 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 		
 		On va, pour cela, essayer de trouver un algorithme qui détermine correctement la température du recuit en fonction du graphe traité : un paramétreur universel.
 		Rappelons rapidement quel est le rôle de la température. Elle ajuste la valeur de la probabilité d'acceptation lorsque la mutation nous dirige vers un état plus haut en énergie : $ p = e^{-\frac{\Delta E}{KT}} $. Il faut paramétrer de telle sorte que les probabilités d'acceptation soient quasi-idéales pour une bonne utilisation du recuit. Sur une évaluation, $ p $  dépend donc de $ \Delta E $ et de $ T $. 
-		Pour concevoir notre paramétreur, on va émettre deux hypothèses importantes. Tout d'abord, on émet l'hypothèse que l'efficacité du recuit simulé dans son ensemble dépend de $ T_{n} $ et de la distribution globale de toutes les différences d'énergie $ \Delta E $ engendrées par des 2-opt sur le graphe. On construira donc un échantillon trié de 1000 $ \Delta E $. Dans un second temps, on suppose qu'il existe un intervalle $ \Delta E_{i} \leq T_{n} \leq \Delta E_{j} $ de cette distribution où le recuit est efficace pour tout graphe. Autrement dit, on veut trouver i et j universels. 
-		L'objectif est donc de déterminer ces deux indices désormais. Sur plusieurs benchmarks, on lance des recuits pour une décroissance linéaire, $ T_{fin} = 0 $ avec différentes températures de départ $ T_{deb} = 2.\Delta E_{k} $. On notera les différentes valeurs de k qui donnent les meilleurs recuits pour se faire une idée de l'intervalle [i,j].
+		Pour concevoir notre paramétreur, on va émettre deux hypothèses importantes. Tout d'abord, on émet l'hypothèse que l'efficacité du recuit simulé dans son ensemble dépend de $ T_{n} $ et de la distribution globale de toutes les différences d'énergie $ \Delta E $ engendrées par des 2-opt sur le graphe. On construira donc un échantillon trié de 1000 $ \Delta E $. Dans un second temps, on suppose qu'il existe un intervalle $ (\Delta E)_{i} \leq T_{n} \leq (\Delta E)_{j} $ de cette distribution où le recuit est efficace pour tout graphe. Autrement dit, on veut trouver i et j universels. 
+		L'objectif est donc de déterminer ces deux indices désormais. Sur plusieurs benchmarks, on lance des recuits pour une décroissance linéaire, $ T_{fin} = 0 $ avec différentes températures de départ $ T_{deb} = 2.(\Delta E)_{k} $. On notera les différentes valeurs de k qui donnent les meilleurs recuits pour se faire une idée de l'intervalle [i,j].
 		
 	\begin{figure}[!h]
 	\begin{center}
 	\includegraphics[scale=0.25]{gr24_zonecritique.jpg}
-	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur gr24}
+	\caption{Performance du recuit pour $ T_{deb} = 2. (\Delta E)_{k} $ sur gr24}
 	\label{gr24_zone}
 	\end{center}
 	\end{figure}
@@ -244,7 +244,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 	\begin{figure}[!h]
 	\begin{center}
 	\includegraphics[scale=0.25]{bier127_zonecritique.jpg}
-	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur bier127}
+	\caption{Performance du recuit pour $ T_{deb} = 2. (\Delta E)_{k} $ sur bier127}
 	\label{bier127_zone}
 	\end{center}
 	\end{figure}
@@ -252,14 +252,14 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 	\begin{figure}[!h]
 	\begin{center}
 	\includegraphics[scale=0.25]{a280_zonecritique.jpg}
-	\caption{Performance du recuit pour $ T_{deb} = 2. \Delta E_{k} $ sur a280}
+	\caption{Performance du recuit pour $ T_{deb} = 2. (\Delta E)_{k} $ sur a280}
 	\label{a280_zone}
 	\end{center}
 	\end{figure}
 		
-		Les trois figures précédentes présentent les résultats de cette expérience sur plusieurs exemples. On constate que sur chacune d'entre elles, la zone $ 2. \Delta E_{50} \leq T_{deb} \leq 2. \Delta E_{100} $ fournit les meilleurs résultats. Il faut donc concentrer la température autour du cinquième centile et du premier décile de la distribution des $ \Delta E $.
-		Pour une décroissance linéaire, on posera $ T_{deb} = \Delta E_{100} $ et $ T_{fin} = \Delta E_{50} $. 
-		Pour une décroissance exponentielle, on posera $ T_{deb} = 10.\Delta E_{100} $ et $ T_{fin} = \Delta E_{50} $.
+		Les trois figures précédentes présentent les résultats de cette expérience sur plusieurs exemples. On constate que sur chacune d'entre elles, la zone $ 2. (\Delta E)_{50} \leq T_{deb} \leq 2. (\Delta E)_{100} $ fournit les meilleurs résultats. Il faut donc concentrer la température autour du cinquième centile et du premier décile de la distribution des $ \Delta E $.
+		Pour une décroissance linéaire, on posera $ T_{deb} = (\Delta E)_{100} $ et $ T_{fin} = (\Delta E)_{50} $. 
+		Pour une décroissance exponentielle, on posera $ T_{deb} = 10.(\Delta E)_{100} $ et $ T_{fin} = (\Delta E)_{50} $.
 		
 	\begin{figure}[!h]
 	\begin{center}
@@ -308,8 +308,8 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 
 	\vspace{1cm}
 	
-	Le recuit quantique est un méta-heuristique qui approfondit le modèle du recuit simulé. Il nous faut d'abord évoquer ce qu'on pourrait appeler un recuit simulé 'en parallèle' ou SA parallèle qui, au lieu de travailler sur un seul état, traiterait plusieurs états en même temps. On aurait alors le choix entre appliquer, sur un problème, un recuit simulé pour $ 10.n^2 $ itérations ou un recuit parallèle de 10 répliques, chacune en $ n^2 $ itérations. On appelle particule l'ensemble de ces 10 répliques. L'avantage du SA parallèle est de dompter, plus que ce que fait le SA classique, le côté combinatoire de ces heuristiques. Par exemple, s'il existe un graphe avec 10 minimums locaux profonds en énergie, le SA classique va se bloquer dans l'un de ces minima alors que le SA parallèle va en explorer plusieurs. Par contre, la décroissance du SA parallèle en énergie est plus lente que pour un recuit simulé classique.
-	Le recuit quantique ou QA est un SA en parallèle dont l'hamiltonien a deux composantes : potentielle et cinétique. La composante cinétique est calculé à partir des matrices de spin des états de la particule. Pour TSP, la matrice de spin notée S d'une route est une matrice triangulaire supérieure. Pour $ i < j $, on ajoute 1 aux indices (i,j) si l'arête correspondante appartient à la route, -1 sinon. La diagonale est constituée de zéros. 
+	Le recuit quantique est une méta-heuristique qui approfondit le modèle du recuit simulé. Il nous faut d'abord évoquer ce qu'on pourrait appeler un recuit simulé 'en parallèle' ou SA parallèle qui, au lieu de travailler sur un seul état, traiterait plusieurs états en même temps. On aurait alors le choix entre appliquer, sur un problème, un recuit simulé pour $ 10.n^2 $ itérations ou un recuit parallèle de 10 répliques, chacune en $ n^2 $ itérations. On appelle particule l'ensemble de ces 10 répliques. L'avantage du SA parallèle est de dompter, plus que ce que fait le SA classique, le côté combinatoire de ces heuristiques. Par exemple, s'il existe un graphe avec 10 minimums locaux profonds en énergie, le SA classique va se bloquer dans l'un de ces minima alors que le SA parallèle va en explorer plusieurs. Par contre, la décroissance en moyenne du SA parallèle en énergie est plus lente que pour un recuit simulé classique.
+	Le recuit quantique ou QA est un SA en parallèle dont l'hamiltonien a deux composantes : potentielle et cinétique. La composante cinétique est calculée à partir des matrices de spins des états de la particule. Pour TSP, la matrice de spin notée S d'une route est une matrice triangulaire supérieure. Pour $ i < j $, on ajoute 1 aux indices (i,j) si l'arête correspondante appartient à la route, -1 sinon. La diagonale est constituée de zéros. 
 	
 	\begin{table}[hp]
 		\centering
@@ -330,7 +330,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 		\caption{Matrice de spin de la route $ 0 \rightarrow 1 \rightarrow 3 \rightarrow 2 \rightarrow 4 $}
 	\end{table}
 	
-	Les répliques sont agencées sous forme de chaînage ou de liste en début de recuit. Ainsi, une réplique a deux répliques voisines fixes tout au long de l'algorithme. L'énergie cinétique est proportionnelle aux produits scalaires des matrices de spin entre routes voisines. On a alors $ H_{cin} = J_{\Gamma}.(\sum_{k=1}^P \sum_{i<j} S_{(i,j),k}.S_{(i,j),k+1} + S_{(i,j),P}.S_{(i,j),1})$ où $ P $ est le nombre de répliques. $ \Gamma $ est un paramètre semblable à $ T $ dans la mesure où il faudra savoir définir $ \Gamma_{deb} $ , $ \Gamma_{fin} $ et le mode de décroissance. On utilisera l'expression suivante pour déterminer $ J_{\Gamma} $ : $ J_{\Gamma} = -0.5T.ln(tanh(-\frac{\Gamma}{PT})) $. 
+	Les répliques sont agencées sous forme de chaînage ou de liste en début de recuit. Ainsi, une réplique a deux répliques voisines fixes tout au long de l'algorithme. L'énergie cinétique est proportionnelle aux produits scalaires des matrices de spin entre routes voisines. On a alors $ H_{cin} = J_{\Gamma}.(\sum_{k=1}^(P-1) \sum_{i<j} S_{(i,j),k}.S_{(i,j),k+1} + S_{(i,j),P}.S_{(i,j),1})$ où $ P $ est le nombre de répliques. $ \Gamma $ est un paramètre semblable à $ T $ dans la mesure où il faudra savoir définir $ \Gamma_{deb} $ , $ \Gamma_{fin} $ et le mode de décroissance. On utilisera l'expression suivante pour déterminer $ J_{\Gamma} $ : $ J_{\Gamma} = -0.5T.ln(tanh(-\frac{\Gamma}{PT})) $. 
 		L'objectif du recuit quantique est donc de minimiser l'hamiltonien $ H = H_{pot} + H_{cin} = \frac{1}{P}.\sum_{k=0}^P H_{pot,k} + H_{cin} $.
 		
 	\begin{algorithm}[!h] 
@@ -350,7 +350,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 			\ENDIF
 			\STATE Choisir $T_{k+1}$ plus petit que $T_{k}$
 			\STATE Choisir $\Gamma_{k+1}$ plus petit que $\Gamma_{k}$
-			\STATE Modifier l'ordre de parcours des répliques sans modifier le chainage
+			\STATE Modifier l'ordre de parcours des répliques sans modifier le chaînage
 		\ENDFOR
 	\ENDFOR
 	\STATE $ bestSol \leftarrow p.getMeilleureReplique $
@@ -378,7 +378,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 	
 	\vspace{1cm}
 	
-	Le dernier paramètre auquel il faut s'intéresser est $ \Gamma $. Nous avons décidé de paramétrer universellement $ \Gamma $ comme nous l'avons fait avec $ T $. La méthode est assez similaire : on va déterminer sa valeur en fonction de l'échantillon des $ \Delta E $ engendrés par des 2-opt. On suppose qu'il existe un k universel idéal tel que $ \Delta E_{cin} = \frac{\Delta E_{k}}{P} $ en fin de recuit où $ \Delta E_{k} $ est un élément de l'échantillon. La variation élémentaire de $ \Delta E_{cin} $ vaut $ 4J_{\Gamma} $ : le terme 4 provient du fait que, lors de la modification d'une arête, chaque route a deux voisins et les valeurs de spin passent de +1 à -1. On obtient donc la relation : $ J_{\Gamma_{fin}} = \frac{\Delta E_{k}}{4P} $. Cette relation est valable pour la dernière itération du QA. On en déduira donc $ \Gamma_{fin} $. On pose arbitrairement $ \Gamma_{deb} = 100\Gamma_{fin} $. 
+	Le dernier paramètre auquel il faut s'intéresser est $ \Gamma $. Nous avons décidé de paramétrer universellement $ \Gamma $ comme nous l'avons fait avec $ T $. La méthode est assez similaire : on va déterminer sa valeur en fonction de l'échantillon des $ \Delta E $ engendrés par des 2-opt. On suppose qu'il existe un k universel idéal tel que $ \Delta E_{cin} = \frac{(\Delta E)_{k}}{P} $ en fin de recuit où $ (\Delta E)_{k} $ est un élément de l'échantillon. La variation élémentaire de $ \Delta E_{cin} $ vaut $ 4J_{\Gamma} $ : le terme 4 provient du fait que, lors de la modification d'une arête, chaque route a deux voisins et les valeurs de spin passent de +1 à -1. On obtient donc la relation : $ J_{\Gamma_{fin}} = \frac{(\Delta E)_{k}}{4P} $. Cette relation est valable pour la dernière itération du QA. On en déduira donc $ \Gamma_{fin} $. On pose arbitrairement $ \Gamma_{deb} = 100\Gamma_{fin} $. 
 	On détermine la valeur de k à l'aide d'expériences sur différents benchmarks. Comme l'illustre la figure ~\ref{gamma}, la valeur k = 200 convient parfaitement. A noter que le paramétrage de $ \Gamma $ est bien moins important que celui de T : ici, l'énergie varie seulement de quelques unités pour les différents paramétrages.
 	
 	\begin{figure}[!h]
@@ -395,7 +395,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 
 \vspace{1cm}
 
-		Il s'agira, dans cette partie, de comparer les performances des deux algorithmes présentés précédemment. Dire lequel des deux algorithmes est le meilleur n'est pas tâche aisée : pour certains paramètres, sur un certain graphe, le recuit simulé donne de meilleurs résultats que le recuit quantique sur un même nombre d'évaluations global. Par exemple, lorsque le nombre de répliques est extravagant sur le recuit quantique, on descend très lentement en énergie, contrairement au recuit simulé qui se rapproche rapidement du minimum global. Inversement, le recuit quantique peut être préférable dans d'autres dispositions. Il faudra donc faire attention à comparer "le meilleur recuit simulé"' au "`meilleur recuit quantique"' pour un même nombre d'évaluations.
+		Il s'agira, dans cette partie, de comparer les performances des deux algorithmes présentés précédemment. Dire lequel des deux algorithmes est le meilleur n'est pas une tâche aisée : pour certains paramètres, sur un certain graphe, le recuit simulé donne de meilleurs résultats que le recuit quantique sur un même nombre d'évaluations global. Par exemple, lorsque le nombre de répliques est extravagant sur le recuit quantique, on descend très lentement en énergie, contrairement au recuit simulé qui se rapproche rapidement du minimum global. Inversement, le recuit quantique peut être préférable dans d'autres dispositions. Il faudra donc faire attention à comparer "le meilleur recuit simulé"' au "`meilleur recuit quantique"' pour un même nombre d'évaluations.
 		
 \vspace{1cm}
 
@@ -409,7 +409,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 	\end{center}
 	\end{figure}
 		
-		Comme on peut le voir, la décroissance du recuit quantique en énergie est plus lente. D'ailleurs, plus le nombre de répliques est important, plus cette décroissance sera lente. En fin de recuit, le recuit simulé stagne car ça prend du temps de trouver un état de meilleure énergie. Le recuit quantique le rattrape en rapprochant les répliques les unes aux autres : cela permet d'explorer davantage d'états potentiellement intéressants. 
+		Comme on peut le voir, la décroissance du recuit quantique en énergie est plus lente. D'ailleurs, plus le nombre de répliques est important, plus cette décroissance sera lente. En fin de recuit, le recuit simulé stagne trouver un état de meilleure énergie prend du temps. Le recuit quantique le rattrape en rapprochant les répliques les unes aux autres : cela permet d'explorer davantage d'états potentiellement intéressants. 
 		Ce rapprochement se mesure en déterminant le nombre d'arêtes communes entre les différentes routes. Si toutes les routes sont identiques, le rapprochement vaut 100. On a tracé les rapprochements pour un recuit de 20 répliques sans énergie cinétique (recuits simulés en parallèle) et avec énergie cinétique (recuit quantique) : 
 		
 	\begin{figure}[!h]
@@ -422,7 +422,7 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 		Le rapprochement sur les recuits simulés en parallèle est uniquement dû à la convergence des répliques vers le minimum global. L'écart entre les deux courbes illustre le rôle du terme cinétique dans l'hamiltonien. C'est en quelque sorte le pari lancé par le recuit quantique : rapprocher les répliques entre elles pour explorer l'espace convexe constitué par ces routes.
 		
 		\vspace{1cm}
-		La comparaison des deux recuits se fera pour des probabilités d'acceptations identiques afin de ne pas influencer le résultat final de l'expérience. Pour cela, on prend $T_{SA} = T_{QA} \times P $ où P est le nombre de répliques. La température est réglée par notre paramétreur, de même que $\Gamma$. Le nombre de répliques idéal est utilisé. La courbe obtenue sur l'évolution des énergies est celle de la figure~\ref{QASA}. Il faut zoomer sur les dernières évaluations du recuit.
+		La comparaison des deux recuits se fera pour des probabilités d'acceptation identiques afin de ne pas influencer le résultat final de l'expérience. Pour cela, on prend $T_{SA} = T_{QA} \times P $ où P est le nombre de répliques. La température est réglée par notre paramétreur, de même que $\Gamma$. Le nombre de répliques idéal est utilisé. La courbe obtenue sur l'évolution des énergies est celle de la figure~\ref{QASA}. Il faut zoomer sur les dernières évaluations du recuit.
 		
 	\begin{figure}[ht]
 	
@@ -447,8 +447,9 @@ Dans une section suivante, nous montrerons comment nous sommes parvenus à fixer
 	\label{comparaison}
 	\end{center}
 	\end{figure}
+
 	
-		Il est interessant de voir que tout l'intérêt du recuit quantique repose dans l'ajout du terme cinétique : en effet, SA parallèle obtient une moyenne inférieure à SA alors que le recuit quantique est avantageux comparé à ces deux algorithmes.
+		Il est interessant de voir que tout l'intérêt du recuit quantique repose dans l'ajout du terme cinétique : en effet, SA parallèle obtient des résultats moins bons que SA alors que le recuit quantique est avantageux comparé à ces deux algorithmes.
 		
 
 \clearpage	
